@@ -1,0 +1,83 @@
+Readin cards: Q, 2, 3, A, 5, 6, J, 8, 9, 4, 7, K, 10.
+The card 10 is inserted to the queue.
+The card 10 is removed and then inserted back to the queue.
+The card K is inserted to the queue.
+The card 10 is removed and then inserted back to the queue.
+The card 7 is inserted to the queue.
+The card K is removed and then inserted back to the queue.
+The card 4 is inserted to the queue.
+The card 10 is removed and then inserted back to the queue.
+The card 9 is inserted to the queue.
+The card 7 is removed and then inserted back to the queue.
+The card 8 is inserted to the queue.
+The card K is removed and then inserted back to the queue.
+The card J is inserted to the queue.
+The card 4 is removed and then inserted back to the queue.
+The card 6 is inserted to the queue.
+The card 10 is removed and then inserted back to the queue.
+The card 5 is inserted to the queue.
+The card 9 is removed and then inserted back to the queue.
+The card A is inserted to the queue.
+The card 7 is removed and then inserted back to the queue.
+The card 3 is inserted to the queue.
+The card 8 is removed and then inserted back to the queue.
+The card 2 is inserted to the queue.
+The card K is removed and then inserted back to the queue.
+The card Q is inserted to the queue.
+The card J is removed and then inserted back to the queue.
+The queue after 1st step: 4 6 10 5 9 A 7 3 8 2 K Q J .
+The card 4 is removed from the queue and pushed to the stack.
+The card 6 is removed from the queue and pushed to the stack.
+The card 10 is removed from the queue and pushed to the stack.
+The card 5 is removed from the queue and pushed to the stack.
+The card 9 is removed from the queue and pushed to the stack.
+The card A is removed from the queue and pushed to the stack.
+The card 7 is removed from the queue and pushed to the stack.
+The card 3 is removed from the queue and pushed to the stack.
+The card 8 is removed from the queue and pushed to the stack.
+The card 2 is removed from the queue and pushed to the stack.
+The card K is removed from the queue and pushed to the stack.
+The card Q is removed from the queue and pushed to the stack.
+The card J is removed from the queue and pushed to the stack.
+The stack after 2nd step: 4 6 10 5 9 A 7 3 8 2 K Q J .
+The card J is popped from the stack and inserted to the queue.
+The card Q is popped from the stack and inserted to the queue.
+The card K is popped from the stack and inserted to the queue.
+The card 2 is popped from the stack and inserted to the queue.
+The card 8 is popped from the stack and inserted to the queue.
+The card 3 is popped from the stack and inserted to the queue.
+The card 7 is popped from the stack and inserted to the queue.
+The card A is popped from the stack and inserted to the queue.
+The card 9 is popped from the stack and inserted to the queue.
+The card 5 is popped from the stack and inserted to the queue.
+The card 10 is popped from the stack and inserted to the queue.
+The card 6 is popped from the stack and inserted to the queue.
+The card 4 is popped from the stack and inserted to the queue.
+The shuffled queue after 3rd step: J Q K 2 8 3 7 A 9 5 10 6 4 .
+The card J is removed and inserted back to the queue.
+The card Q is removed from the queue and opened.
+The card K is removed and inserted back to the queue.
+The card 2 is removed from the queue and opened.
+The card 8 is removed and inserted back to the queue.
+The card 3 is removed from the queue and opened.
+The card 7 is removed and inserted back to the queue.
+The card A is removed from the queue and opened.
+The card 9 is removed and inserted back to the queue.
+The card 5 is removed from the queue and opened.
+The card 10 is removed and inserted back to the queue.
+The card 6 is removed from the queue and opened.
+The card 4 is removed and inserted back to the queue.
+The card J is removed from the queue and opened.
+The card K is removed and inserted back to the queue.
+The card 8 is removed from the queue and opened.
+The card 7 is removed and inserted back to the queue.
+The card 9 is removed from the queue and opened.
+The card 10 is removed and inserted back to the queue.
+The card 4 is removed from the queue and opened.
+The card K is removed and inserted back to the queue.
+The card 7 is removed from the queue and opened.
+The card 10 is removed and inserted back to the queue.
+The card K is removed from the queue and opened.
+The card 10 is removed and inserted back to the queue.
+The card 10 is removed from the queue and opened.
+Opened cards: Q, 2, 3, A, 5, 6, J, 8, 9, 4, 7, K, 10.

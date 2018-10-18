@@ -1,0 +1,80 @@
+Read in 49. Create a new node for 49. The updated linked list: 49 --> NULL 
+Read in 17. Create a new node for 17. The updated linked list: 49 --> 17 --> NULL 
+Read in 56. Create a new node for 56. The updated linked list: 49 --> 17 --> 56 --> NULL 
+Read in 85. Create a new node for 85. The updated linked list: 49 --> 17 --> 56 --> 85 --> NULL 
+Read in 12. Create a new node for 12. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> NULL 
+Read in 97. Create a new node for 97. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> NULL 
+Read in 33. Create a new node for 33. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> NULL 
+Read in 71. Create a new node for 71. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> NULL 
+Read in 19. Create a new node for 19. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> NULL 
+Read in 62. Create a new node for 62. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> NULL 
+Read in 38. Create a new node for 38. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> NULL 
+Read in 84. Create a new node for 84. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> NULL 
+Read in 51. Create a new node for 51. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> NULL 
+Read in 29. Create a new node for 29. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> NULL 
+Read in 77. Create a new node for 77. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> NULL 
+Read in 65. Create a new node for 65. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> NULL 
+Read in 44. Create a new node for 44. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> NULL 
+Read in 99. Create a new node for 99. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> NULL 
+Read in 4. Create a new node for 4. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> NULL 
+Read in 47. Create a new node for 47. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> NULL 
+Read in 67. Create a new node for 67. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> NULL 
+Read in 41. Create a new node for 41. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> NULL 
+Read in 23. Create a new node for 23. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> NULL 
+Read in 88. Create a new node for 88. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> NULL 
+Read in 73. Create a new node for 73. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> NULL 
+Read in 8. Create a new node for 8. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> NULL 
+Read in 10. Create a new node for 10. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> NULL 
+Read in 100. Create a new node for 100. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> NULL 
+Read in 25. Create a new node for 25. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> NULL 
+Read in 91. Create a new node for 91. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> NULL 
+Read in 58. Create a new node for 58. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> NULL 
+Read in 45. Create a new node for 45. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> NULL 
+Read in 22. Create a new node for 22. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> NULL 
+Read in 15. Create a new node for 15. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> NULL 
+Read in 35. Create a new node for 35. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> 35 --> NULL 
+Read in 95. Create a new node for 95. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> 35 --> 95 --> NULL 
+Read in 60. Create a new node for 60. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> 35 --> 95 --> 60 --> NULL 
+Read in 20. Create a new node for 20. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> 35 --> 95 --> 60 --> 20 --> NULL 
+Read in 7. Create a new node for 7. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> 35 --> 95 --> 60 --> 20 --> 7 --> NULL 
+Read in 50. Create a new node for 50. The updated linked list: 49 --> 17 --> 56 --> 85 --> 12 --> 97 --> 33 --> 71 --> 19 --> 62 --> 38 --> 84 --> 51 --> 29 --> 77 --> 65 --> 44 --> 99 --> 4 --> 47 --> 67 --> 41 --> 23 --> 88 --> 73 --> 8 --> 10 --> 100 --> 25 --> 91 --> 58 --> 45 --> 22 --> 15 --> 35 --> 95 --> 60 --> 20 --> 7 --> 50 --> NULL 
+
+The reversed linked list: 50 --> 7 --> 20 --> 60 --> 95 --> 35 --> 15 --> 22 --> 45 --> 58 --> 91 --> 25 --> 100 --> 10 --> 8 --> 73 --> 88 --> 23 --> 41 --> 67 --> 47 --> 4 --> 99 --> 44 --> 65 --> 77 --> 29 --> 51 --> 84 --> 38 --> 62 --> 19 --> 71 --> 33 --> 97 --> 12 --> 85 --> 56 --> 17 --> 49 --> NULL 
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 71
+Remove the node for 71. The updated linked list: 50 --> 7 --> 20 --> 60 --> 95 --> 35 --> 15 --> 22 --> 45 --> 58 --> 91 --> 25 --> 100 --> 10 --> 8 --> 73 --> 88 --> 23 --> 41 --> 67 --> 47 --> 4 --> 99 --> 44 --> 65 --> 77 --> 29 --> 51 --> 84 --> 38 --> 62 --> 19 --> 33 --> 97 --> 12 --> 85 --> 56 --> 17 --> 49 --> NULL 
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 51
+Remove the node for 51. The updated linked list: 50 --> 7 --> 20 --> 60 --> 95 --> 35 --> 15 --> 22 --> 45 --> 58 --> 91 --> 25 --> 100 --> 10 --> 8 --> 73 --> 88 --> 23 --> 41 --> 67 --> 47 --> 4 --> 99 --> 44 --> 65 --> 77 --> 29 --> 84 --> 38 --> 62 --> 19 --> 33 --> 97 --> 12 --> 85 --> 56 --> 17 --> 49 --> NULL 
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 38
+Remove the node for 38. The updated linked list: 50 --> 7 --> 20 --> 60 --> 95 --> 35 --> 15 --> 22 --> 45 --> 58 --> 91 --> 25 --> 100 --> 10 --> 8 --> 73 --> 88 --> 23 --> 41 --> 67 --> 47 --> 4 --> 99 --> 44 --> 65 --> 77 --> 29 --> 84 --> 62 --> 19 --> 33 --> 97 --> 12 --> 85 --> 56 --> 17 --> 49 --> NULL 
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 5
+Not found.
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 0
+Not found.
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 25
+Remove the node for 25. The updated linked list: 50 --> 7 --> 20 --> 60 --> 95 --> 35 --> 15 --> 22 --> 45 --> 58 --> 91 --> 100 --> 10 --> 8 --> 73 --> 88 --> 23 --> 41 --> 67 --> 47 --> 4 --> 99 --> 44 --> 65 --> 77 --> 29 --> 84 --> 62 --> 19 --> 33 --> 97 --> 12 --> 85 --> 56 --> 17 --> 49 --> NULL 
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 42
+Not found.
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 32
+Not found.
+
+Next command [Q for quit, D for deletion]: D
+The number to be deleted: 47
+Remove the node for 47. The updated linked list: 50 --> 7 --> 20 --> 60 --> 95 --> 35 --> 15 --> 22 --> 45 --> 58 --> 91 --> 100 --> 10 --> 8 --> 73 --> 88 --> 23 --> 41 --> 67 --> 4 --> 99 --> 44 --> 65 --> 77 --> 29 --> 84 --> 62 --> 19 --> 33 --> 97 --> 12 --> 85 --> 56 --> 17 --> 49 --> NULL 
+
+Next command [Q for quit, D for deletion]: Q

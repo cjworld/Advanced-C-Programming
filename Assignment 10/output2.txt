@@ -1,0 +1,65 @@
+User want 5 disks.
+Initial Poles
+A:  5  4  3  2  1                	B:                               	C:                               
+Move 1 from A to C
+A:  5  4  3  2                   	B:                               	C:  1                            
+Move 2 from A to B
+A:  5  4  3                      	B:  2                            	C:  1                            
+Move 1 from C to B
+A:  5  4  3                      	B:  2  1                         	C:                               
+Move 3 from A to C
+A:  5  4                         	B:  2  1                         	C:  3                            
+Move 1 from B to A
+A:  5  4  1                      	B:  2                            	C:  3                            
+Move 2 from B to C
+A:  5  4  1                      	B:                               	C:  3  2                         
+Move 1 from A to C
+A:  5  4                         	B:                               	C:  3  2  1                      
+Move 4 from A to B
+A:  5                            	B:  4                            	C:  3  2  1                      
+Move 1 from C to B
+A:  5                            	B:  4  1                         	C:  3  2                         
+Move 2 from C to A
+A:  5  2                         	B:  4  1                         	C:  3                            
+Move 1 from B to A
+A:  5  2  1                      	B:  4                            	C:  3                            
+Move 3 from C to B
+A:  5  2  1                      	B:  4  3                         	C:                               
+Move 1 from A to C
+A:  5  2                         	B:  4  3                         	C:  1                            
+Move 2 from A to B
+A:  5                            	B:  4  3  2                      	C:  1                            
+Move 1 from C to B
+A:  5                            	B:  4  3  2  1                   	C:                               
+Final move 5 from A to C
+A:                               	B:  4  3  2  1                   	C:  5                            
+Move 1 from B to A
+A:  1                            	B:  4  3  2                      	C:  5                            
+Move 2 from B to C
+A:  1                            	B:  4  3                         	C:  5  2                         
+Move 1 from A to C
+A:                               	B:  4  3                         	C:  5  2  1                      
+Move 3 from B to A
+A:  3                            	B:  4                            	C:  5  2  1                      
+Move 1 from C to B
+A:  3                            	B:  4  1                         	C:  5  2                         
+Move 2 from C to A
+A:  3  2                         	B:  4  1                         	C:  5                            
+Move 1 from B to A
+A:  3  2  1                      	B:  4                            	C:  5                            
+Final move 4 from B to C
+A:  3  2  1                      	B:                               	C:  5  4                         
+Move 1 from A to C
+A:  3  2                         	B:                               	C:  5  4  1                      
+Move 2 from A to B
+A:  3                            	B:  2                            	C:  5  4  1                      
+Move 1 from C to B
+A:  3                            	B:  2  1                         	C:  5  4                         
+Final move 3 from A to C
+A:                               	B:  2  1                         	C:  5  4  3                      
+Move 1 from B to A
+A:  1                            	B:  2                            	C:  5  4  3                      
+Final move 2 from B to C
+A:  1                            	B:                               	C:  5  4  3  2                   
+Final move 1 from A to C
+A:                               	B:                               	C:  5  4  3  2  1                

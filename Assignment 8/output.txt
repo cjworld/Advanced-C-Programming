@@ -1,0 +1,62 @@
+Opening scope {. Push it to the scope stack. The updated scope stack: { 
+Ignore x. Drop it.
+Ignore +. Drop it.
+Opening scope (. Push it to the scope stack. The updated scope stack: { ( 
+Ignore y. Drop it.
+Ignore -. Drop it.
+Opening scope [. Push it to the scope stack. The updated scope stack: { ( [ 
+Ignore a. Drop it.
+Ignore +. Drop it.
+Ignore b. Drop it.
+Closing scope ]. Pop a opening scope from the scope stack, and opening scope [ is match. The updated scope stack: { ( 
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: { 
+Ignore *. Drop it.
+Opening scope (. Push it to the scope stack. The updated scope stack: { ( 
+Ignore c. Drop it.
+Ignore -. Drop it.
+Opening scope [. Push it to the scope stack. The updated scope stack: { ( [ 
+Opening scope (. Push it to the scope stack. The updated scope stack: { ( [ ( 
+Ignore d. Drop it.
+Ignore +. Drop it.
+Ignore e. Drop it.
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: { ( [ 
+Closing scope ]. Pop a opening scope from the scope stack, and opening scope [ is match. The updated scope stack: { ( 
+Ignore +. Drop it.
+Ignore k. Drop it.
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: { 
+Closing scope }. Pop a opening scope from the scope stack, and opening scope { is match. The updated scope stack: 
+Ignore /. Drop it.
+Opening scope (. Push it to the scope stack. The updated scope stack: ( 
+Ignore h. Drop it.
+Ignore -. Drop it.
+Opening scope (. Push it to the scope stack. The updated scope stack: ( ( 
+Ignore j. Drop it.
+Ignore -. Drop it.
+Opening scope (. Push it to the scope stack. The updated scope stack: ( ( ( 
+Ignore k. Drop it.
+Ignore -. Drop it.
+Opening scope [. Push it to the scope stack. The updated scope stack: ( ( ( [ 
+Ignore l. Drop it.
+Ignore -. Drop it.
+Ignore n. Drop it.
+Closing scope ]. Pop a opening scope from the scope stack, and opening scope [ is match. The updated scope stack: ( ( ( 
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: ( ( 
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: ( 
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: 
+Ignore +. Drop it.
+Opening scope {. Push it to the scope stack. The updated scope stack: { 
+Ignore u. Drop it.
+Ignore +. Drop it.
+Opening scope [. Push it to the scope stack. The updated scope stack: { [ 
+Ignore m. Drop it.
+Ignore *. Drop it.
+Opening scope (. Push it to the scope stack. The updated scope stack: { [ ( 
+Ignore p. Drop it.
+Ignore -. Drop it.
+Ignore q. Drop it.
+Closing scope ). Pop a opening scope from the scope stack, and opening scope ( is match. The updated scope stack: { [ 
+Closing scope ]. Pop a opening scope from the scope stack, and opening scope [ is match. The updated scope stack: { 
+Ignore /. Drop it.
+Ignore r. Drop it.
+Closing scope }. Pop a opening scope from the scope stack, and opening scope { is match. The updated scope stack: 
+The string {x+(y-[a+b])*(c-[(d+e)]+k)}/(h-(j-(k-[l-n])))+{u+[m*(p-q)]/r} is valid.

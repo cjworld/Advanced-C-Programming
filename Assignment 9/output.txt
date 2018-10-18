@@ -1,0 +1,14 @@
+Input: E 25 E 37 E 45 E 52 E 98 D D D E 36 E 12 D D E 69.
+Enqueue command. Push data 25 into queue. The updated queue: 25 
+Enqueue command. Push data 37 into queue. The updated queue: 25 37 
+Enqueue command. Push data 45 into queue. The updated queue: 25 37 45 
+Enqueue command. Push data 52 into queue. The updated queue: 25 37 45 52 
+Enqueue command. Push data 98 into queue. The updated queue: 25 37 45 52 98 
+Dequeue command. Pop data 25 from queue. The updated queue: 37 45 52 98 
+Dequeue command. Pop data 37 from queue. The updated queue: 45 52 98 
+Dequeue command. Pop data 45 from queue. The updated queue: 52 98 
+Enqueue command. Push data 36 into queue. The updated queue: 52 98 36 
+Enqueue command. Push data 12 into queue. The updated queue: 52 98 36 12 
+Dequeue command. Pop data 52 from queue. The updated queue: 98 36 12 
+Dequeue command. Pop data 98 from queue. The updated queue: 36 12 
+Enqueue command. Push data 69 into queue. The updated queue: 36 12 69 

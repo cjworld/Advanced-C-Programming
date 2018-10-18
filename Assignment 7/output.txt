@@ -1,0 +1,95 @@
+Place your queen in a column [0-7, Q]: 4
+
+*   *   *   *   U   *   *   *   
+Q   *   *   *   *   *   *   *   
+*   *   *   Q   *   *   *   *   
+*   *   *   *   *   Q   *   *   
+*   *   *   *   *   *   *   Q   
+*   Q   *   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   *   Q   *   *   *   *   *   
+
+Place your queen in a column [0-7, Q]: 2
+
+*   *   U   *   *   *   *   *   
+Q   *   *   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   *   *   *   Q   *   *   *   
+*   *   *   *   *   *   *   Q   
+*   Q   *   *   *   *   *   *   
+*   *   *   Q   *   *   *   *   
+*   *   *   *   *   Q   *   *   
+
+Place your queen in a column [0-7, Q]: 9
+
+Invalid. Please try again.
+
+Place your queen in a column [0-7, Q]: 6
+
+*   *   *   *   *   *   U   *   
+Q   *   *   *   *   *   *   *   
+*   *   Q   *   *   *   *   *   
+*   *   *   *   *   *   *   Q   
+*   *   *   *   *   Q   *   *   
+*   *   *   Q   *   *   *   *   
+*   Q   *   *   *   *   *   *   
+*   *   *   *   Q   *   *   *   
+
+Place your queen in a column [0-7, Q]: 3
+
+*   *   *   U   *   *   *   *   
+Q   *   *   *   *   *   *   *   
+*   *   *   *   Q   *   *   *   
+*   *   *   *   *   *   *   Q   
+*   Q   *   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   *   Q   *   *   *   *   *   
+*   *   *   *   *   Q   *   *   
+
+Place your queen in a column [0-7, Q]: 0
+
+U   *   *   *   *   *   *   *   
+*   *   *   *   Q   *   *   *   
+*   *   *   *   *   *   *   Q   
+*   *   *   *   *   Q   *   *   
+*   *   Q   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   Q   *   *   *   *   *   *   
+*   *   *   Q   *   *   *   *   
+
+Place your queen in a column [0-7, Q]: 5
+
+*   *   *   *   *   U   *   *   
+Q   *   *   *   *   *   *   *   
+*   *   *   *   Q   *   *   *   
+*   Q   *   *   *   *   *   *   
+*   *   *   *   *   *   *   Q   
+*   *   Q   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   *   *   Q   *   *   *   *   
+
+Place your queen in a column [0-7, Q]: 1
+
+*   U   *   *   *   *   *   *   
+*   *   *   Q   *   *   *   *   
+*   *   *   *   *   Q   *   *   
+*   *   *   *   *   *   *   Q   
+*   *   Q   *   *   *   *   *   
+Q   *   *   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   *   *   *   Q   *   *   *   
+
+Place your queen in a column [0-7, Q]: 7
+
+*   *   *   *   *   *   *   U   
+*   Q   *   *   *   *   *   *   
+*   *   *   Q   *   *   *   *   
+Q   *   *   *   *   *   *   *   
+*   *   *   *   *   *   Q   *   
+*   *   *   *   Q   *   *   *   
+*   *   Q   *   *   *   *   *   
+*   *   *   *   *   Q   *   *   
+
+Place your queen in a column [0-7, Q]: Q
+
+See you!

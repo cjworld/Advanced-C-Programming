@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+  xmlns="http://ns.adobe.com/f4m/1.0">
+  <id>/scf/lhds/p/1972621/sp/197262100/serveFlavor/entryId/0_nk9bedi5/v/2/flavorId/0_,1iyt2ppc,j55mrzq1,/forceproxy/true/name/a.mp4.urlset/manifest.f4m</id>
+  <duration>167.973</duration>
+  <streamType>recorded</streamType>
+  <bootstrapInfo
+    profile="named"
+    id="bootstrap0">AAAAi2Fic3QAAAAAAAAAAQAAAAPoAAAAAAACkCUAAAAAAAAAAAAAAAAAAQAAABlhc3J0AAAAAAAAAAABAAAAAQAAABwBAAAARmFmcnQAAAAAAAAD6AAAAAADAAAAAQAAAAAAAAAAAAAXcAAAABwAAAAAAAJ40AAAF1UAAAAAAAAAAAAAAAAAAAAAAA==</bootstrapInfo>
+  <bootstrapInfo
+    profile="named"
+    id="bootstrap1">AAAAi2Fic3QAAAAAAAAAAQAAAAPoAAAAAAACkCUAAAAAAAAAAAAAAAAAAQAAABlhc3J0AAAAAAAAAAABAAAAAQAAABwBAAAARmFmcnQAAAAAAAAD6AAAAAADAAAAAQAAAAAAAAAAAAAXcAAAABwAAAAAAAJ40AAAF1UAAAAAAAAAAAAAAAAAAAAAAA==</bootstrapInfo>
+  <media
+    bitrate="181"
+    width="576"
+    height="480"
+    url="frag-f1-v1-a1-"
+    bootstrapInfoId="bootstrap0">
+    <metadata>AgAKb25NZXRhRGF0YQgAAAAMAAhkdXJhdGlvbgBAZP8i0OVgQgAFd2lkdGgAQIIAAAAAAAAABmhlaWdodABAfgAAAAAAAAANdmlkZW9kYXRhcmF0ZQBAXViDEm6XjQAJZnJhbWVyYXRlAEAt2cqB6RMbAAx2aWRlb2NvZGVjaWQAQBwAAAAAAAAADWF1ZGlvZGF0YXJhdGUAQFAB++dsi0QAD2F1ZGlvc2FtcGxlcmF0ZQBA5YiAAAAAAAAPYXVkaW9zYW1wbGVzaXplAEAwAAAAAAAAAAZzdGVyZW8BAQAMYXVkaW9jb2RlY2lkAEAkAAAAAAAAAAhmaWxlc2l6ZQBBTQ6BgAAAAAAACQ==</metadata>
+  </media>
+  <media
+    bitrate="188"
+    width="576"
+    height="480"
+    url="frag-f2-v1-a1-"
+    bootstrapInfoId="bootstrap1">
+    <metadata>AgAKb25NZXRhRGF0YQgAAAAMAAhkdXJhdGlvbgBAZP8i0OVgQgAFd2lkdGgAQIIAAAAAAAAABmhlaWdodABAfgAAAAAAAAANdmlkZW9kYXRhcmF0ZQBAXzul41P3zwAJZnJhbWVyYXRlAEAt2cqB6RMbAAx2aWRlb2NvZGVjaWQAQBwAAAAAAAAADWF1ZGlvZGF0YXJhdGUAQFAB++dsi0QAD2F1ZGlvc2FtcGxlcmF0ZQBA5YiAAAAAAAAPYXVkaW9zYW1wbGVzaXplAEAwAAAAAAAAAAZzdGVyZW8BAQAMYXVkaW9jb2RlY2lkAEAkAAAAAAAAAAhmaWxlc2l6ZQBBTkQFgAAAAAAACQ==</metadata>
+  </media>
+</manifest>

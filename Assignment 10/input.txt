@@ -1,0 +1,2 @@
+Choice: E E E E E D D D E E D D E
+Data: 25 37 45 52 98 36 12 69
