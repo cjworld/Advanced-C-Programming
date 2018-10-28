@@ -16,7 +16,7 @@
 /*                                                            */
 /*       File Name: ass6_chiyuchen.c                          */
 /*                                                            */
-/*       Date: 10/13/2018                                     */
+/*       Date: 10/26/2018                                     */
 /*                                                            */
 /*       Objective: Play tic-tac-toe                          */
 /*                                                            */
@@ -115,7 +115,7 @@ int main(int argc, char const *argv[])
 
     // For file I/O
     FILE *fout;
-    fout = fopen ("output3.txt","w+");
+    fout = fopen (argv[1], "w+");
 
     // Print out the initial board.
     printboard(&board[0][0], BOARDSIZE, fout);
@@ -143,7 +143,7 @@ int main(int argc, char const *argv[])
             board[row-1][col-1] = -1;
             winner = is_gameover(&board[0][0], BOARDSIZE);
         }
-        // printboard(&board[0][0], BOARDSIZE, fout);
+        printboard(&board[0][0], BOARDSIZE, fout);
 
         // Decrease the steps by one.
         leftsteps--;
