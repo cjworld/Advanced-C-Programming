@@ -1,0 +1,138 @@
+
+Infix string: ( 25 % 7 * 8 ) / ( 75 / 5 - 8 + ( 2 ^ 4 - ( 2 ^ 2 + 16 ) + 16 - 3 ) + 5 - 3 ^ 2 ) 
+
+Start to convert the infix string: ( 25 % 7 * 8 ) / ( 75 / 5 - 8 + ( 2 ^ 4 - ( 2 ^ 2 + 16 ) + 16 - 3 ) + 5 - 3 ^ 2 ) 
+Operator: ).
+>> Push operator ) to the optstack.
+Operand: 2.
+>> Push operand 2 to the prefix stack.
+Operator: ^.
+>> Push operator ^ to the optstack.
+Operand: 3.
+>> Push operand 3 to the prefix stack.
+Operator: -.
+>> Push operator - to the optstack.
+Operand: 5.
+>> Push operand 5 to the prefix stack.
+Operator: +.
+>> Push operator + to the optstack.
+Operator: ).
+>> Push operator ) to the optstack.
+Operand: 3.
+>> Push operand 3 to the prefix stack.
+Operator: -.
+>> Push operator - to the optstack.
+Operand: 16.
+>> Push operand 16 to the prefix stack.
+Operator: +.
+>> Push operator + to the optstack.
+Operator: ).
+>> Push operator ) to the optstack.
+Operand: 16.
+>> Push operand 16 to the prefix stack.
+Operator: +.
+>> Push operator + to the optstack.
+Operand: 2.
+>> Push operand 2 to the prefix stack.
+Operator: ^.
+>> Pop the operators which has higher prcedence after the operand ^.
+>>>> Pop the operator + from the optstack and push to the prefix stack.
+>> Push operator ^ to the optstack.
+Operand: 2.
+>> Push operand 2 to the prefix stack.
+Operator: (.
+>> Pop until ).
+>>>> Pop operator ^ from the optstack and push to the prefix stack.
+>> Pop operator ) from the optstack.
+>> Push operator - to the optstack.
+Operand: 4.
+>> Push operand 4 to the prefix stack.
+Operator: ^.
+>> Pop the operators which has higher prcedence after the operand ^.
+>>>> Pop the operator - from the optstack and push to the prefix stack.
+>>>> Pop the operator + from the optstack and push to the prefix stack.
+>>>> Pop the operator - from the optstack and push to the prefix stack.
+>> Push operator ^ to the optstack.
+Operand: 2.
+>> Push operand 2 to the prefix stack.
+Operator: (.
+>> Pop until ).
+>>>> Pop operator ^ from the optstack and push to the prefix stack.
+>> Pop operator ) from the optstack.
+>> Push operator + to the optstack.
+Operand: 8.
+>> Push operand 8 to the prefix stack.
+Operator: -.
+>> Push operator - to the optstack.
+Operand: 5.
+>> Push operand 5 to the prefix stack.
+Operator: /.
+>> Push operator / to the optstack.
+Operand: 75.
+>> Push operand 75 to the prefix stack.
+Operator: (.
+>> Pop until ).
+>>>> Pop operator / from the optstack and push to the prefix stack.
+>>>> Pop operator - from the optstack and push to the prefix stack.
+>>>> Pop operator + from the optstack and push to the prefix stack.
+>>>> Pop operator + from the optstack and push to the prefix stack.
+>>>> Pop operator - from the optstack and push to the prefix stack.
+>>>> Pop operator ^ from the optstack and push to the prefix stack.
+>> Pop operator ) from the optstack.
+>> Push operator / to the optstack.
+Operator: ).
+>> Push operator ) to the optstack.
+Operand: 8.
+>> Push operand 8 to the prefix stack.
+Operator: *.
+>> Push operator * to the optstack.
+Operand: 7.
+>> Push operand 7 to the prefix stack.
+Operator: %.
+>> Push operator % to the optstack.
+Operand: 25.
+>> Push operand 25 to the prefix stack.
+Operator: (.
+>> Pop until ).
+>>>> Pop operator % from the optstack and push to the prefix stack.
+>>>> Pop operator * from the optstack and push to the prefix stack.
+>> Pop operator ) from the optstack.
+Pop all operands in the optstack: / 
+>> Push operand / to the prefix stack.
+
+Prefix string: / * % 25 7 8 ^ - + + - / 75 5 8 ^ 2 - + - 4 ^ 2 + 2 16 16 3 5 3 2 
+
+Start to evaluate the prefix string: / * % 25 7 8 ^ - + + - / 75 5 8 ^ 2 - + - 4 ^ 2 + 2 16 16 3 5 3 2 
+>> Operand: 2. Push operand 2 to opd stack.
+>> Operand: 3. Push operand 3 to opd stack.
+>> Operand: 5. Push operand 5 to opd stack.
+>> Operand: 3. Push operand 3 to opd stack.
+>> Operand: 16. Push operand 16 to opd stack.
+>> Operand: 16. Push operand 16 to opd stack.
+>> Operand: 2. Push operand 2 to opd stack.
+>> Operator: +. Pop operand 2 and operand 16 from opd stack, and push result 18 to opd stack.
+>> Operand: 2. Push operand 2 to opd stack.
+>> Operator: ^. Pop operand 2 and operand 18 from opd stack, and push result 16 to opd stack.
+>> Operand: 4. Push operand 4 to opd stack.
+>> Operator: -. Pop operand 4 and operand 16 from opd stack, and push result -12 to opd stack.
+>> Operator: +. Pop operand -12 and operand 16 from opd stack, and push result 4 to opd stack.
+>> Operator: -. Pop operand 4 and operand 3 from opd stack, and push result 1 to opd stack.
+>> Operand: 2. Push operand 2 to opd stack.
+>> Operator: ^. Pop operand 2 and operand 1 from opd stack, and push result 3 to opd stack.
+>> Operand: 8. Push operand 8 to opd stack.
+>> Operand: 5. Push operand 5 to opd stack.
+>> Operand: 75. Push operand 75 to opd stack.
+>> Operator: /. Pop operand 75 and operand 5 from opd stack, and push result 15 to opd stack.
+>> Operator: -. Pop operand 15 and operand 8 from opd stack, and push result 7 to opd stack.
+>> Operator: +. Pop operand 7 and operand 3 from opd stack, and push result 10 to opd stack.
+>> Operator: +. Pop operand 10 and operand 5 from opd stack, and push result 15 to opd stack.
+>> Operator: -. Pop operand 15 and operand 3 from opd stack, and push result 12 to opd stack.
+>> Operator: ^. Pop operand 12 and operand 2 from opd stack, and push result 14 to opd stack.
+>> Operand: 8. Push operand 8 to opd stack.
+>> Operand: 7. Push operand 7 to opd stack.
+>> Operand: 25. Push operand 25 to opd stack.
+>> Operator: %. Pop operand 25 and operand 7 from opd stack, and push result 4 to opd stack.
+>> Operator: *. Pop operand 4 and operand 8 from opd stack, and push result 32 to opd stack.
+>> Operator: /. Pop operand 32 and operand 14 from opd stack, and push result 2 to opd stack.
+
+The result of evaluation: 2.

@@ -16,7 +16,7 @@
 /*                                                            */
 /*       File Name: ass17_chiyuchen.c                         */
 /*                                                            */
-/*       Date: 10/20/2018                                     */
+/*       Date: 10/26/2018                                     */
 /*                                                            */
 /*       Objective: Infix to Prefix                           */
 /*                                                            */
@@ -61,7 +61,10 @@ ELEMNODE *spop(ELEMSTACK *);
 void spush(ELEMSTACK *, char *, int);
 void sdump(ELEMSTACK *, FILE *);
 int has_lower_precedence_than(char, char);
+int prefix_eval(ELEMSTACK *, FILE *);
+void prefix_convert(ELEMSTACK *, ELEMSTACK *, FILE *);
 
+/* Return the top element in the stack */ 
 ELEMNODE *stop(ELEMSTACK *ps)
 {
     if (ps->top == 0)
@@ -94,9 +97,9 @@ void sdump(ELEMSTACK *ps, FILE *fout)
     while (ptr < ps->top)
     {
         if (ps->elements[ptr].type == OPERATOR)
-            printf("%c ", ps->elements[ptr].data.opt);
+            fprintf(fout, "%c ", ps->elements[ptr].data.opt);
         else
-            printf("%d ", ps->elements[ptr].data.opd);
+            fprintf(fout, "%d ", ps->elements[ptr].data.opd);
         ptr++;
     }
 }
@@ -137,6 +140,7 @@ void spush(ELEMSTACK *ps, char *opt, int opd)
     return;
 }
 
+/* Check if the given op has lower precedence than prev op */
 int has_lower_precedence_than(char op, char prev)
 {
     if (prev == ')')
@@ -161,17 +165,158 @@ int has_lower_precedence_than(char op, char prev)
     return TRUE;
 }
 
+/* Evaluate a prefix stack */
+int prefix_eval(ELEMSTACK *prefixsp, FILE *fout)
+{
+    int result;
+    ELEMNODE *elemnode, *opnode1, *opnode2;
+    ELEMSTACK optstack = {0};
+    ELEMSTACK opdstack = {0};
+
+    fprintf(fout, "Start to evaluate the prefix string: ");
+    sdump(prefixsp, fout);
+    fprintf(fout, "\n");
+    while (!sempty(prefixsp))
+    {
+        elemnode = spop(prefixsp);
+        if (elemnode->type == OPERATOR)
+        {
+            fprintf(fout, ">> Operator: %c.", elemnode->data.opt);
+            opnode1 = spop(&opdstack);
+            opnode2 = spop(&opdstack);
+            fprintf(fout, " Pop operand %d and operand %d from opd stack", opnode1->data.opd, opnode2->data.opd);
+            switch (elemnode->data.opt)
+            {
+                case '+': result = opnode1->data.opd + opnode2->data.opd; break;
+                case '-': result = opnode1->data.opd - opnode2->data.opd; break;
+                case '*': result = opnode1->data.opd * opnode2->data.opd; break;
+                case '/': result = opnode1->data.opd / opnode2->data.opd; break;
+                case '%': result = opnode1->data.opd % opnode2->data.opd; break;
+                case '^': result = opnode1->data.opd ^ opnode2->data.opd; break;
+                default:  result = 0;
+            }
+            spush(&opdstack, NULL, result);
+            fprintf(fout, ", and push result %d to opd stack.\n", result);
+        }
+        else
+        {
+            spush(&opdstack, NULL, elemnode->data.opd);
+            fprintf(fout, ">> Operand: %d. Push operand %d to opd stack.\n", elemnode->data.opd, elemnode->data.opd);
+        }   
+    }
+    elemnode = spop(&opdstack);
+    return elemnode->data.opd;
+}
+
+/* Convert a infix stack to a prefix stack */
+void prefix_convert(ELEMSTACK *infixsp, ELEMSTACK *prefixsp, FILE *fout)
+{
+    ELEMNODE *elemnode, *prevelemnode;
+    ELEMSTACK optstack = {0};
+    ELEMSTACK tmpstack = {0};
+    ELEMSTACK *tmpsp = &tmpstack;
+
+    fprintf(fout, "Start to convert the infix string: ");
+    sdump(infixsp, fout);
+    fprintf(fout, "\n");
+
+    while (!sempty(infixsp))
+    {
+        elemnode = spop(infixsp);
+        if (elemnode->type == OPERATOR)
+        {
+            // If we encounter a (, we need to pop out all operator in between ( and ).
+            fprintf(fout, "Operator: %c.\n", elemnode->data.opt);
+            if (elemnode->data.opt == '(')
+            {
+                fprintf(fout, ">> Pop until ).\n");
+                prevelemnode = stop(&optstack);
+                if (prevelemnode)
+                {
+                    while (prevelemnode->data.opt != ')')
+                    {
+                        prevelemnode = spop(&optstack);
+                        spush(tmpsp, &(prevelemnode->data.opt), 0);
+                        fprintf(fout, ">>>> Pop operator %c from the optstack and push to the prefix stack.\n", prevelemnode->data.opt);
+                        prevelemnode = stop(&optstack);
+                    }
+                    fprintf(fout, ">> Pop operator %c from the optstack.\n", prevelemnode->data.opt);
+                    prevelemnode = spop(&optstack);
+                    if (!sempty(infixsp))
+                    {
+                        elemnode = spop(infixsp);
+                    }
+                    else
+                    {
+                        elemnode = NULL;
+                    }
+                }
+            }
+            // Compare to the toppest operator in the stack, which is the operator followed.
+            // If the folloing operator has higher precedence, process it first.
+            if (elemnode)
+            {
+                prevelemnode = stop(&optstack);
+                if (prevelemnode)
+                {
+                    if (has_lower_precedence_than(elemnode->data.opt, prevelemnode->data.opt) == TRUE)
+                    {
+                        fprintf(fout, ">> Pop the operators which has higher prcedence after the operand %c.\n", elemnode->data.opt);
+                        while (has_lower_precedence_than(elemnode->data.opt, prevelemnode->data.opt) == TRUE)
+                        {
+                            prevelemnode = spop(&optstack);
+                            spush(tmpsp, &(prevelemnode->data.opt), 0);
+                            fprintf(fout, ">>>> Pop the operator %c from the optstack and push to the prefix stack.\n", prevelemnode->data.opt);
+                            prevelemnode = stop(&optstack);
+                        }
+                    }
+                }
+                spush(&optstack, &(elemnode->data.opt), 0);
+                fprintf(fout, ">> Push operator %c to the optstack.\n", elemnode->data.opt);
+            }
+        }
+        else
+        {
+            fprintf(fout, "Operand: %d.\n", elemnode->data.opd);
+            spush(tmpsp, NULL, elemnode->data.opd);
+            fprintf(fout, ">> Push operand %d to the prefix stack.\n", elemnode->data.opd);
+        }   
+    }
+    if (!sempty(&optstack))
+    {
+        fprintf(fout, "Pop all operands in the optstack: ");
+        sdump(&optstack, fout);
+        fprintf(fout, "\n");
+        while (!sempty(&optstack))
+        {
+            prevelemnode = spop(&optstack);
+            spush(tmpsp, &(prevelemnode->data.opt), 0);
+            fprintf(fout, ">> Push operand %c to the prefix stack.\n", prevelemnode->data.opt);
+        }
+    }
+
+    while (!sempty(tmpsp))
+    {
+        elemnode = spop(tmpsp);
+        if (elemnode->type == OPERATOR)
+        {
+            spush(prefixsp, &(elemnode->data.opt), 0);
+        }
+        else
+        {
+            spush(prefixsp, NULL, elemnode->data.opd);
+        }   
+    }
+}
+
 int main(int argc, char const *argv[])
 {
-    int i, isnum, result;
+    int i, isnum, value;
     char op, *startp;
     int input[MAXSIZE];
-    ELEMNODE *elemnode, *prevelemnode, *opnode1, *opnode2;
-    ELEMSTACK infixstack;
-    ELEMSTACK reversedstack;
-    ELEMSTACK prefixstack;
-    ELEMSTACK optstack;
-    ELEMSTACK opdstack;
+    ELEMNODE *elemnode;
+    ELEMSTACK infixstack = {0};
+    ELEMSTACK prefixstack = {0};
 
     // For file I/O
     FILE *fin, *fout;
@@ -186,11 +331,6 @@ int main(int argc, char const *argv[])
     data[bytes] = '\0';
 
     // Parse
-    infixstack.top = 0;
-    reversedstack.top = 0;
-    prefixstack.top = 0;
-    optstack.top = 0;
-    opdstack.top = 0;
     isnum = FALSE;
     startp = NULL;
     for (i = 0; i < bytes; i++)
@@ -224,149 +364,22 @@ int main(int argc, char const *argv[])
     free(data);
 	fclose(fin);
 
+    fprintf(fout, "\n");
+    fprintf(fout, "Infix string: ");
     sdump(&infixstack, fout);
-    printf("\n");
+    fprintf(fout, "\n\n");
 
-    // while (!sempty(&infixstack))
-    // {
-    //     elemnode = spop(&infixstack);
-    //     if (elemnode->type == OPERATOR)
-    //     {
-    //         spush(&reversedstack, &(elemnode->data.opt), 0);
-    //     }
-    //     else
-    //     {
-    //         spush(&reversedstack, NULL, elemnode->data.opd);
-    //     }   
-    // }
-    // sdump(&reversedstack, fout);
-    // printf("\n");
+    prefix_convert(&infixstack, &prefixstack, fout);
 
-    while (!sempty(&infixstack))
-    {
-        elemnode = spop(&infixstack);
-        if (elemnode->type == OPERATOR)
-        {
-            printf("OP: %c\n", elemnode->data.opt);
-            if (elemnode->data.opt == '(')
-            {
-                prevelemnode = stop(&optstack);
-                if (prevelemnode)
-                {
-                    printf(">>>> Pop OP %c until ).\n", prevelemnode->data.opt);
-                    while (prevelemnode->data.opt != ')')
-                    {
-                        prevelemnode = spop(&optstack);
-                        spush(&prefixstack, &(prevelemnode->data.opt), 0);
-                        printf(">>>> Push OP %c to prefix stack.\n", prevelemnode->data.opt);
-                        prevelemnode = stop(&optstack);
-                        printf(">>>> Pop OP %c until ).\n", prevelemnode->data.opt);
-                    }
-                    prevelemnode = spop(&optstack);
-                    if (!sempty(&infixstack))
-                    {
-                        elemnode = spop(&infixstack);
-                        printf(">>>> Pop next OP %c.\n", elemnode->data.opt);
-                    }
-                    else
-                    {
-                        elemnode = NULL;
-                    }
-                }
-            }
-            if (elemnode)
-            {
-                prevelemnode = stop(&optstack);
-                if (prevelemnode)
-                {
-                    printf(">>>> Compare OP %c with prev OP %c\n", elemnode->data.opt, prevelemnode->data.opt);
-                    while (has_lower_precedence_than(elemnode->data.opt, prevelemnode->data.opt) == TRUE)
-                    {
-                        prevelemnode = spop(&optstack);
-                        spush(&prefixstack, &(prevelemnode->data.opt), 0);
-                        printf(">>>> Push prev OP %c to prefix stack.\n", prevelemnode->data.opt);
-                        prevelemnode = stop(&optstack);
-                        printf(">>>> Compare OP %c with prev OP %c.\n", elemnode->data.opt, prevelemnode->data.opt);
-                    }
-                }
-                spush(&optstack, &(elemnode->data.opt), 0);
-                printf(">> Push OP %c to optstack.\n", elemnode->data.opt);
-                printf(">> prefixstack: ");
-                sdump(&prefixstack, fout);
-                printf("\n");
-                printf(">> optstack: ");
-                sdump(&optstack, fout);
-                printf("\n");
-            }
-        }
-        else
-        {
-            printf("OPERAND: %d\n", elemnode->data.opd);
-            spush(&prefixstack, NULL, elemnode->data.opd);
-            printf(">> Push OPERAND %d to prefix stack.\n", elemnode->data.opd);
-            printf(">> prefixstack: ");
-            sdump(&prefixstack, fout);
-            printf("\n");
-            printf(">> optstack: ");
-            sdump(&optstack, fout);
-            printf("\n");
-        }   
-    }
-    while (!sempty(&optstack))
-    {
-        prevelemnode = spop(&optstack);
-        spush(&prefixstack, &(prevelemnode->data.opt), 0);
-        printf(">> Push prev OP %c to prefix stack.\n", prevelemnode->data.opt);
-    }
+    fprintf(fout, "\n");
+    fprintf(fout, "Prefix string: ");
     sdump(&prefixstack, fout);
-    printf("\n");
+    fprintf(fout, "\n\n");
 
-    while (!sempty(&prefixstack))
-    {
-        elemnode = spop(&prefixstack);
-        if (elemnode->type == OPERATOR)
-        {
-            spush(&reversedstack, &(elemnode->data.opt), 0);
-        }
-        else
-        {
-            spush(&reversedstack, NULL, elemnode->data.opd);
-        }   
-    }
-    sdump(&reversedstack, fout);
-    printf("\n");
+    value = prefix_eval(&prefixstack, fout);
 
-    while (!sempty(&reversedstack))
-    {
-        elemnode = spop(&reversedstack);
-        if (elemnode->type == OPERATOR)
-        {
-            printf("OP: %c\n", elemnode->data.opt);
-            opnode1 = spop(&opdstack);
-            opnode2 = spop(&opdstack);
-            printf(">> Pop operand %d and operand %d from opd stack.\n", opnode1->data.opd, opnode2->data.opd);
-            switch (elemnode->data.opt)
-            {
-                case '+': result = opnode1->data.opd + opnode2->data.opd; break;
-                case '-': result = opnode1->data.opd - opnode2->data.opd; break;
-                case '*': result = opnode1->data.opd * opnode2->data.opd; break;
-                case '/': result = opnode1->data.opd / opnode2->data.opd; break;
-                case '%': result = opnode1->data.opd % opnode2->data.opd; break;
-                case '^': result = opnode1->data.opd ^ opnode2->data.opd; break;
-                default:  result = 0;
-            }
-            spush(&opdstack, NULL, result);
-            printf(">> Push result %d to opd stack.\n", result);
-        }
-        else
-        {
-            printf("OPERAND: %d\n", elemnode->data.opd);
-            spush(&opdstack, NULL, elemnode->data.opd);
-            printf(">> Push OPERAND %d to opd stack.\n", elemnode->data.opd);
-        }   
-    }
-    elemnode = spop(&opdstack);
-    printf("Result %d.\n", elemnode->data.opd);
+    fprintf(fout, "\n");
+    fprintf(fout, "The result of evaluation: %d.\n", value);
 
     // Cleanup
     fclose(fout);
