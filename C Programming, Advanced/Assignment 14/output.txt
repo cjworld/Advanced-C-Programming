@@ -1,0 +1,713 @@
+Input: 572, 430, 315, 363, 320, 545, 451, 437, 476, 472, 493, 395, 462, 521, 406, 412, 510, 560, 425, 595, 580, 583, 531, 511, 459, 518, 356, 379, 488, 532
+
+Create a tree for key 572 
+The final tree: 
+572 at 0 at level 0
+
+
+Insert key 430 to the tree.
+>> Insert key 430 to position 0 of node starts with key 572 
+>>>> Shift key 572 from pos 0 to pos 1 
+>>>> Place key 430 at pos 0: 
+The final tree: 
+430 at 0 at level 0
+572 at 1 at level 0
+
+
+Insert key 315 to the tree.
+>> Insert key 315 to position 0 of node starts with key 430 
+>>>> Shift key 572 from pos 1 to pos 2 
+>>>> Shift key 430 from pos 0 to pos 1 
+>>>> Place key 315 at pos 0: 
+The final tree: 
+315 at 0 at level 0
+430 at 1 at level 0
+572 at 2 at level 0
+
+
+Insert key 363 to the tree.
+>> Insert key 363 to position 1 of node starts with key 315 
+>>>> Shift key 572 from pos 2 to pos 3 
+>>>> Shift key 430 from pos 1 to pos 2 
+>>>> Place key 363 at pos 1: 
+The final tree: 
+315 at 0 at level 0
+363 at 1 at level 0
+430 at 2 at level 0
+572 at 3 at level 0
+
+
+Insert key 320 to the tree.
+>> Insert key 320 to position 1 of node starts with key 315 
+>>>> Split node starts with key 315. 
+>>>> Place key 320 at pos 1: 
+>>>> Key 363 left to be insert
+>>>> Create a new root node for key 363
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---572 at 1 at level 1
+
+
+Insert key 545 to the tree.
+>> Insert key 545 to position 1 of node starts with key 430 
+>>>> Shift key 572 from pos 1 to pos 2 
+>>>> Place key 545 at pos 1: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---545 at 1 at level 1
+|---572 at 2 at level 1
+
+
+Insert key 451 to the tree.
+>> Insert key 451 to position 1 of node starts with key 430 
+>>>> Shift key 572 from pos 2 to pos 3 
+>>>> Shift key 545 from pos 1 to pos 2 
+>>>> Place key 451 at pos 1: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---451 at 1 at level 1
+|---545 at 2 at level 1
+|---572 at 3 at level 1
+
+
+Insert key 437 to the tree.
+>> Insert key 437 to position 1 of node starts with key 430 
+>>>> Split node starts with key 430. 
+>>>> Place key 437 at pos 1: 
+>>>> Key 451 left to be insert
+>>>> Place key 451 at pos 1: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---437 at 1 at level 1
+451 at 1 at level 0
+|---545 at 0 at level 1
+|---572 at 1 at level 1
+
+
+Insert key 476 to the tree.
+>> Insert key 476 to position 0 of node starts with key 545 
+>>>> Shift key 572 from pos 1 to pos 2 
+>>>> Shift key 545 from pos 0 to pos 1 
+>>>> Place key 476 at pos 0: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---437 at 1 at level 1
+451 at 1 at level 0
+|---476 at 0 at level 1
+|---545 at 1 at level 1
+|---572 at 2 at level 1
+
+
+Insert key 472 to the tree.
+>> Insert key 472 to position 0 of node starts with key 476 
+>>>> Shift key 572 from pos 2 to pos 3 
+>>>> Shift key 545 from pos 1 to pos 2 
+>>>> Shift key 476 from pos 0 to pos 1 
+>>>> Place key 472 at pos 0: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---437 at 1 at level 1
+451 at 1 at level 0
+|---472 at 0 at level 1
+|---476 at 1 at level 1
+|---545 at 2 at level 1
+|---572 at 3 at level 1
+
+
+Insert key 493 to the tree.
+>> Insert key 493 to position 2 of node starts with key 472 
+>>>> Split node starts with key 472. 
+>>>> Key 493 left to be insert
+>>>> Place key 493 at pos 2: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---430 at 0 at level 1
+|---437 at 1 at level 1
+451 at 1 at level 0
+|---472 at 0 at level 1
+|---476 at 1 at level 1
+493 at 2 at level 0
+|---545 at 0 at level 1
+|---572 at 1 at level 1
+
+
+Insert key 395 to the tree.
+>> Insert key 395 to position 0 of node starts with key 430 
+>>>> Shift key 437 from pos 1 to pos 2 
+>>>> Shift key 430 from pos 0 to pos 1 
+>>>> Place key 395 at pos 0: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---395 at 0 at level 1
+|---430 at 1 at level 1
+|---437 at 2 at level 1
+451 at 1 at level 0
+|---472 at 0 at level 1
+|---476 at 1 at level 1
+493 at 2 at level 0
+|---545 at 0 at level 1
+|---572 at 1 at level 1
+
+
+Insert key 462 to the tree.
+>> Insert key 462 to position 0 of node starts with key 472 
+>>>> Shift key 476 from pos 1 to pos 2 
+>>>> Shift key 472 from pos 0 to pos 1 
+>>>> Place key 462 at pos 0: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---395 at 0 at level 1
+|---430 at 1 at level 1
+|---437 at 2 at level 1
+451 at 1 at level 0
+|---462 at 0 at level 1
+|---472 at 1 at level 1
+|---476 at 2 at level 1
+493 at 2 at level 0
+|---545 at 0 at level 1
+|---572 at 1 at level 1
+
+
+Insert key 521 to the tree.
+>> Insert key 521 to position 0 of node starts with key 545 
+>>>> Shift key 572 from pos 1 to pos 2 
+>>>> Shift key 545 from pos 0 to pos 1 
+>>>> Place key 521 at pos 0: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---395 at 0 at level 1
+|---430 at 1 at level 1
+|---437 at 2 at level 1
+451 at 1 at level 0
+|---462 at 0 at level 1
+|---472 at 1 at level 1
+|---476 at 2 at level 1
+493 at 2 at level 0
+|---521 at 0 at level 1
+|---545 at 1 at level 1
+|---572 at 2 at level 1
+
+
+Insert key 406 to the tree.
+>> Insert key 406 to position 1 of node starts with key 395 
+>>>> Shift key 437 from pos 2 to pos 3 
+>>>> Shift key 430 from pos 1 to pos 2 
+>>>> Place key 406 at pos 1: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---395 at 0 at level 1
+|---406 at 1 at level 1
+|---430 at 2 at level 1
+|---437 at 3 at level 1
+451 at 1 at level 0
+|---462 at 0 at level 1
+|---472 at 1 at level 1
+|---476 at 2 at level 1
+493 at 2 at level 0
+|---521 at 0 at level 1
+|---545 at 1 at level 1
+|---572 at 2 at level 1
+
+
+Insert key 412 to the tree.
+>> Insert key 412 to position 2 of node starts with key 395 
+>>>> Split node starts with key 395. 
+>>>> Key 412 left to be insert
+>>>> Shift key 493 from pos 2 to pos 3 
+>>>> Shift key 451 from pos 1 to pos 2 
+>>>> Place key 412 at pos 1: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---395 at 0 at level 1
+|---406 at 1 at level 1
+412 at 1 at level 0
+|---430 at 0 at level 1
+|---437 at 1 at level 1
+451 at 2 at level 0
+|---462 at 0 at level 1
+|---472 at 1 at level 1
+|---476 at 2 at level 1
+493 at 3 at level 0
+|---521 at 0 at level 1
+|---545 at 1 at level 1
+|---572 at 2 at level 1
+
+
+Insert key 510 to the tree.
+>> Insert key 510 to position 0 of node starts with key 521 
+>>>> Shift key 572 from pos 2 to pos 3 
+>>>> Shift key 545 from pos 1 to pos 2 
+>>>> Shift key 521 from pos 0 to pos 1 
+>>>> Place key 510 at pos 0: 
+The final tree: 
+|---315 at 0 at level 1
+|---320 at 1 at level 1
+363 at 0 at level 0
+|---395 at 0 at level 1
+|---406 at 1 at level 1
+412 at 1 at level 0
+|---430 at 0 at level 1
+|---437 at 1 at level 1
+451 at 2 at level 0
+|---462 at 0 at level 1
+|---472 at 1 at level 1
+|---476 at 2 at level 1
+493 at 3 at level 0
+|---510 at 0 at level 1
+|---521 at 1 at level 1
+|---545 at 2 at level 1
+|---572 at 3 at level 1
+
+
+Insert key 560 to the tree.
+>> Insert key 560 to position 3 of node starts with key 510 
+>>>> Split node starts with key 510. 
+>>>> Shift key 572 from pos 0 to pos 1 
+>>>> Place key 560 at pos 0: 
+>>>> Key 545 left to be insert
+>>>> Split node starts with key 363. 
+>>>> Place key 545 at pos 1: 
+>>>> Key 451 left to be insert
+>>>> Create a new root node for key 451
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---430 at 0 at level 2
+|   |---437 at 1 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---521 at 1 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+
+
+Insert key 425 to the tree.
+>> Insert key 425 to position 0 of node starts with key 430 
+>>>> Shift key 437 from pos 1 to pos 2 
+>>>> Shift key 430 from pos 0 to pos 1 
+>>>> Place key 425 at pos 0: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---521 at 1 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+
+
+Insert key 595 to the tree.
+>> Insert key 595 to position 2 of node starts with key 560 
+>>>> Place key 595 at pos 2: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---521 at 1 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|   |---595 at 2 at level 2
+
+
+Insert key 580 to the tree.
+>> Insert key 580 to position 2 of node starts with key 560 
+>>>> Shift key 595 from pos 2 to pos 3 
+>>>> Place key 580 at pos 2: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---521 at 1 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|   |---580 at 2 at level 2
+|   |---595 at 3 at level 2
+
+
+Insert key 583 to the tree.
+>> Insert key 583 to position 3 of node starts with key 560 
+>>>> Split node starts with key 560. 
+>>>> Shift key 595 from pos 0 to pos 1 
+>>>> Place key 583 at pos 0: 
+>>>> Key 580 left to be insert
+>>>> Place key 580 at pos 2: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---521 at 1 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 2 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 531 to the tree.
+>> Insert key 531 to position 2 of node starts with key 510 
+>>>> Place key 531 at pos 2: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---521 at 1 at level 2
+|   |---531 at 2 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 2 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 511 to the tree.
+>> Insert key 511 to position 1 of node starts with key 510 
+>>>> Shift key 531 from pos 2 to pos 3 
+>>>> Shift key 521 from pos 1 to pos 2 
+>>>> Place key 511 at pos 1: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---462 at 0 at level 2
+|   |---472 at 1 at level 2
+|   |---476 at 2 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+|   |---521 at 2 at level 2
+|   |---531 at 3 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 2 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 459 to the tree.
+>> Insert key 459 to position 0 of node starts with key 462 
+>>>> Shift key 476 from pos 2 to pos 3 
+>>>> Shift key 472 from pos 1 to pos 2 
+>>>> Shift key 462 from pos 0 to pos 1 
+>>>> Place key 459 at pos 0: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---459 at 0 at level 2
+|   |---462 at 1 at level 2
+|   |---472 at 2 at level 2
+|   |---476 at 3 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+|   |---521 at 2 at level 2
+|   |---531 at 3 at level 2
+|---545 at 1 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 2 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 518 to the tree.
+>> Insert key 518 to position 2 of node starts with key 510 
+>>>> Split node starts with key 510. 
+>>>> Key 518 left to be insert
+>>>> Shift key 580 from pos 2 to pos 3 
+>>>> Shift key 545 from pos 1 to pos 2 
+>>>> Place key 518 at pos 1: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---459 at 0 at level 2
+|   |---462 at 1 at level 2
+|   |---472 at 2 at level 2
+|   |---476 at 3 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+|---518 at 1 at level 1
+|   |---521 at 0 at level 2
+|   |---531 at 1 at level 2
+|---545 at 2 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 3 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 356 to the tree.
+>> Insert key 356 to position 2 of node starts with key 315 
+>>>> Place key 356 at pos 2: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|   |---356 at 2 at level 2
+|---363 at 0 at level 1
+|   |---395 at 0 at level 2
+|   |---406 at 1 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---459 at 0 at level 2
+|   |---462 at 1 at level 2
+|   |---472 at 2 at level 2
+|   |---476 at 3 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+|---518 at 1 at level 1
+|   |---521 at 0 at level 2
+|   |---531 at 1 at level 2
+|---545 at 2 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 3 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 379 to the tree.
+>> Insert key 379 to position 0 of node starts with key 395 
+>>>> Shift key 406 from pos 1 to pos 2 
+>>>> Shift key 395 from pos 0 to pos 1 
+>>>> Place key 379 at pos 0: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|   |---356 at 2 at level 2
+|---363 at 0 at level 1
+|   |---379 at 0 at level 2
+|   |---395 at 1 at level 2
+|   |---406 at 2 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---459 at 0 at level 2
+|   |---462 at 1 at level 2
+|   |---472 at 2 at level 2
+|   |---476 at 3 at level 2
+|---493 at 0 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+|---518 at 1 at level 1
+|   |---521 at 0 at level 2
+|   |---531 at 1 at level 2
+|---545 at 2 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 3 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 488 to the tree.
+>> Insert key 488 to position 4 of node starts with key 459 
+>>>> Split node starts with key 459. 
+>>>> Place key 488 at pos 1: 
+>>>> Key 472 left to be insert
+>>>> Split node starts with key 493. 
+>>>> Shift key 493 from pos 0 to pos 1 
+>>>> Place key 472 at pos 0: 
+>>>> Key 518 left to be insert
+>>>> Place key 518 at pos 1: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|   |---356 at 2 at level 2
+|---363 at 0 at level 1
+|   |---379 at 0 at level 2
+|   |---395 at 1 at level 2
+|   |---406 at 2 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---459 at 0 at level 2
+|   |---462 at 1 at level 2
+|---472 at 0 at level 1
+|   |---476 at 0 at level 2
+|   |---488 at 1 at level 2
+|---493 at 1 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+518 at 1 at level 0
+|   |---521 at 0 at level 2
+|   |---531 at 1 at level 2
+|---545 at 0 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 1 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
+Insert key 532 to the tree.
+>> Insert key 532 to position 2 of node starts with key 521 
+>>>> Place key 532 at pos 2: 
+The final tree: 
+|   |---315 at 0 at level 2
+|   |---320 at 1 at level 2
+|   |---356 at 2 at level 2
+|---363 at 0 at level 1
+|   |---379 at 0 at level 2
+|   |---395 at 1 at level 2
+|   |---406 at 2 at level 2
+|---412 at 1 at level 1
+|   |---425 at 0 at level 2
+|   |---430 at 1 at level 2
+|   |---437 at 2 at level 2
+451 at 0 at level 0
+|   |---459 at 0 at level 2
+|   |---462 at 1 at level 2
+|---472 at 0 at level 1
+|   |---476 at 0 at level 2
+|   |---488 at 1 at level 2
+|---493 at 1 at level 1
+|   |---510 at 0 at level 2
+|   |---511 at 1 at level 2
+518 at 1 at level 0
+|   |---521 at 0 at level 2
+|   |---531 at 1 at level 2
+|   |---532 at 2 at level 2
+|---545 at 0 at level 1
+|   |---560 at 0 at level 2
+|   |---572 at 1 at level 2
+|---580 at 1 at level 1
+|   |---583 at 0 at level 2
+|   |---595 at 1 at level 2
+
+
