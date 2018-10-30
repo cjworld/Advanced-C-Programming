@@ -1,3 +1,4 @@
+import datetime
 # For recording and playing
 from threading import Thread
 import pyaudio
@@ -15,15 +16,18 @@ class TimeStamp():
     def __init__(self, time):
         self.time = time
 
-    def __repr__(self):
-        return str(self.time)
-
 
 class TimeInterval():
 
     def __init__(self, stime, etime):
         self.stime = stime
         self.etime = etime
+
+    def __str__(self):
+        return "(%s, %s)" % (self.stime, self.etime)
+
+    def __repr__(self):
+        return "(%s, %s)" % (self.stime, self.etime)
 
 
 class Account():
@@ -32,76 +36,68 @@ class Account():
         self.name = name
 
 
-class Asset():
+class Metadata():
 
     def __init__(self, cname):
         self.cname = cname
         self.ctime = datetime.datetime.now()
 
 
-class Audio(Asset):
+class Audio(Metadata):
 
     def __init__(self, cname, path):
-        Asset.__init__(self, cname)
+        Metadata.__init__(self, cname)
         self.path = path
 
+    def __str__(self):
+        return "%s" % (self.path)
 
-class AudioNote(Asset):
-
-    def __init__(self, cname, message):
-        Asset.__init__(self, cname)
-        self.message = message
+    def __repr__(self):
+        return "%s" % (self.path)
 
 
-class AudioMarker(Asset):
+class SplittedAudio(Metadata):
+
+    def __init__(self, cname, audio, sentenceList):
+        Metadata.__init__(self, cname)
+        self.audio = audio
+        self.sentenceList = sentenceList
+
+    def __str__(self):
+        return "%s: %s" % (self.audio, self.sentenceList)
+
+    def __repr__(self):
+        return "%s: %s" % (self.audio, self.sentenceList)
+
+
+class Mark(Metadata):
 
     def __init__(self, cname, timestamp):
-        Asset.__init__(self, cname)
+        Metadata.__init__(self, cname)
         self.timestamp = timestamp
-        self.noteList = list()
 
-    def addNote(self, name, message):
-        self.noteList.append(AudioNote(name, message))
+    def __str__(self):
+        return "%f" % (self.timestamp)
+
+    def __repr__(self):
+        return "%f" % (self.timestamp)
 
 
-class AudioDocument(Asset):
+class AudioMarkList(Metadata):
 
-    def __init__(self, cname, audio):
-        Asset.__init__(self, cname)
+    def __init__(self, cname, audio, markList):
+        Metadata.__init__(self, cname)
         self.audio = audio
-        self.markerList = list()
+        self.markList = markList
 
-    def addMarker(self, name, timestamp):
-        self.markerList.append(AudioMarker(name, timestamp))
+    def __str__(self):
+        return "%s: %s" % (self.audio, self.markList)
 
-
-class AudioSlices(Asset):
-
-    def __init__(self, cname, audio):
-        Asset.__init__(self, cname)
-        self.audio = audio
-        self.slicesList = list()
-
-    def addSlice(self, stime, etime):
-        self.slicesList.append(TimeInterval(stime, etime))
+    def __repr__(self):
+        return "%s: %s" % (self.audio, self.markList)
 
 
-# class AssetACL():
-
-#     def __init__(self, asset):
-#         self.asset = asset
-#         self.readList = list()
-#         self.writeList = list()
-
-
-# class AccountAssets():
-
-#     def __init__(self, account):
-#         self.account = account
-#         self.assetList = dict()
-        
-
-class Application():
+class Application(object):
 
     def __init__(self, account):
         self.running = False
@@ -120,26 +116,26 @@ class Application():
             del self.menu[name]
 
     def executeMenu(self):
-        print " *executeMenu"
-        command = raw_input("%s@%s: " % (self.account.name if self.account else "anonymous", self.appname))
+        while True:
+            command = raw_input("%s@%s: " % (self.account.name if self.account else "anonymous", self.appname))
+            if command in self.menu:
+                break
+            print "Unknown command."
         return self.menu[command]()
 
     def help(self):
         print "%s" % ("|".join(self.menu.keys()))
 
     def start(self):
-        print " *start"
         self.running = True
 
     def execute(self):
-        print " *execute"
         self.start()
         while self.isRunning():
             ret = self.executeMenu()
         return ret
 
     def end(self):
-        print " *end"
         self.running = False
 
     def isRunning(self):
@@ -152,20 +148,17 @@ class BashApplication(Application):
         Application.__init__(self, account)
         self.appname = "Bash"
         self.runningApp = None
+        self.loginAppList = [("logout", self.logout), ("markingRecorder", self.markingRecorder), ("markingPlayer", self.markingPlayer), ("audioSplitter", self.audioSplitter), ("splittedAudioPlayer", self.splittedAudioPlayer), ("audioMarkListPlayer", self.audioMarkListPlayer)]
+        self.logoutAppList = [("login", self.login)]
         if account is None:
-            self.addMenu("login", self.login)
+            self.changeState(False)
         else:
-            self.addMenu("logout", self.logout)
-            self.addMenu("recorder", self.recorder)
-            self.addMenu("slicer", self.slicer)
-            self.addMenu("notetaker", self.notetaker)
+            self.changeState(True)
 
     def execute(self):
         ret = 0
         self.start()
-        print " *execute: ", self.isRunning()
         while self.isRunning() is True:
-            print " *running application: %s" % (self.runningApp)
             if self.runningApp:
                 ret = self.runningApp.execute()
                 self.runningApp = None
@@ -173,56 +166,60 @@ class BashApplication(Application):
                 ret = Application.executeMenu(self)
         return ret
 
+    def changeState(self, logined):
+        if logined:
+            for (appName, appHandler) in self.logoutAppList:
+                self.removeMenu(appName)
+            for (appName, appHandler) in self.loginAppList:
+                self.addMenu(appName, appHandler)
+        else:
+            for (appName, appHandler) in self.loginAppList:
+                self.removeMenu(appName)
+            for (appName, appHandler) in self.logoutAppList:
+                self.addMenu(appName, appHandler)
+
     def login(self):
-        print " *login"
         name = raw_input("Account: ")
         account = Account(name)
         self.account = account
-        self.removeMenu("login")
-        self.addMenu("logout", self.logout)
-        self.addMenu("recorder", self.recorder)
-        self.addMenu("slicer", self.slicer)
-        self.addMenu("notetaker", self.notetaker)
+        self.changeState(True)
         return 0
 
     def logout(self):
-        print " *logout"
         self.account = None
-        self.removeMenu("logout")
-        self.removeMenu("recorder")
-        self.removeMenu("slicer")
-        self.removeMenu("notetaker")
-        self.addMenu("login", self.logout)
+        self.changeState(False)
         return 0
 
-    def recorder(self):
-        print " *create recorder"
-        self.runningApp = RecorderApplication(self.account)
+    def markingRecorder(self):
+        self.runningApp = MarkingRecorderApp(self.account)
         return 0
 
-    def slicer(self):
-        print " *create slicer"
-        self.runningApp = SlicerApplication(self.account)
+    def markingPlayer(self):
+        self.runningApp = MarkingPlayerApp(self.account)
         return 0
 
-    def notetaker(self):
-        print " *create notetaker"
-        self.runningApp = NoteTakerApplication(self.account)
+    def audioSplitter(self):
+        self.runningApp = AudioSplitterApp(self.account)
+        return 0
+
+    def splittedAudioPlayer(self):
+        self.runningApp = SplittedAudioPlayerApp(self.account)
+        return 0
+
+    def audioMarkListPlayer(self):
+        self.runningApp = AudioMarkListPlayer(self.account)
         return 0
 
 
-class RecorderApplication(Application):
+class Recorder():
 
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
 
-    def __init__(self, account):
-        Application.__init__(self, account)
-        self.appname = "Recorder"
-        self.addMenu("record", self.record)
-        self.recording = False
+    def __init__(self):
+        self.isRecording = False
         self.MAXSECONDS = 60 * 60 * 5
         self.channels = Recorder.CHANNELS
         self.rate = Recorder.RATE
@@ -234,16 +231,14 @@ class RecorderApplication(Application):
         self.recordingThread = None
 
     def record(self):
-        if self.recording == False and self.recordingThread == None:
-            self.recording = True
+        if self.isRecording == False and self.recordingThread == None:
+            self.isRecording = True
             self.recordingThread = Thread(target=self.recording, name="recording thread")
             self.recordingThread.start()
-            self.addMenu("stop", self.stop)
             return 0
         return 1
 
     def recording(self):
-        print("* recording")
         p = pyaudio.PyAudio()
         stream = p.open(format=self.format,
                         channels=self.channels,
@@ -252,215 +247,366 @@ class RecorderApplication(Application):
                         frames_per_buffer=self.chunk)
         self.frames = []
 
-        while self.recording == True:
+        while self.isRecording == True:
             data = stream.read(self.chunk)
             self.frames.append(data)
 
-        print("* done recording")
         stream.stop_stream()
         stream.close()
-
         p.terminate()
         self.sampwidth = p.get_sample_size(self.format)
 
-        self.addMenu("save", self.save)
-
-    def getTiming(self):
-        return numpy.divide(len(self.frames) * self.chunk, self.rate, dtype=numpy.float64)
-
     def stop(self):
-        if self.recording == True and self.recordingThread:
-            self.recording = False
+        if self.isRecording == True and self.recordingThread:
+            self.isRecording = False
             self.recordingThread.join()
             self.recordingThread = None
+            return 0
+        return 1
 
-    def save(self):
-        filename = raw_input("wav filename: ")
-        filepath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
-        wf = wave.open(filepath, 'wb')
+    def save(self, cname, path):
+        audio = Audio(cname, path)
+        wf = wave.open(path, 'wb')
         wf.setnchannels(self.channels)
         wf.setsampwidth(self.sampwidth)
         wf.setframerate(self.rate)
         wf.writeframes(b''.join(self.frames))
         wf.close()
+        return audio
 
 
-class AudioDocumentRecorder(RecorderApplication):
+class Marker():
+
+    def __init__(self):
+        self.markList = list()
+
+    def mark(self, cname, timestamp):
+        mark = Mark(cname, timestamp)
+        self.markList.append(mark)
+
+    def reset(self):
+        self.markList = list()
+
+    def save(self, cname, audio, path):
+        audioMarkList = AudioMarkList(cname, audio, self.markList)
+        with open(path, "w+") as f:
+            pickle.dump(audioMarkList, f)
+        return audioMarkList
+
+
+class MarkingRecorderApp(Recorder, Marker, Application):
 
     def __init__(self, account):
-        RecorderApplication.__init__(self, account)
-        self.appname = "AudioDocumentRecorder"
-        self.audiodoc = AudioDocument(self.account.name, None)
-        self.noteList = list()
+        Application.__init__(self, account)
+        Marker.__init__(self)
+        Recorder.__init__(self)
+        self.appname = "MarkingRecorderApp"
         self.addMenu("record", self.record)
 
     def record(self):
-        if RecorderApplication.record(self) == 0:
-            self.addMenu("mark", self.mark)
+        if Recorder.record(self) == 0:
+            self.markList = list()
+            self.removeMenu("record")
             self.addMenu("stop", self.stop)
+            self.addMenu("mark", self.mark)
+            return 0
+        return 1
+
+    def stop(self):
+        if Recorder.stop(self) == 0:
+            self.removeMenu("stop")
+            self.removeMenu("mark")
+            self.addMenu("record", self.record)
+            self.addMenu("save", self.save)
             return 0
         return 1
 
     def mark(self):
-        self.audiodoc.addMarker(self.account.name, self.getTiming())
+        timestamp = numpy.divide(len(self.frames) * self.chunk, self.rate, dtype=numpy.float64)
+        print "* mark at %f" % (timestamp)
+        Marker.mark(self, self.account.name, timestamp)
+
+    def save(self):
+        recorderName = raw_input("Recorder filename: ")
+        recorderPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.wav" % (self.account.name, recorderName)
+        audio = Recorder.save(self, self.account.name, recorderPath)
+        
+        amlName = raw_input("AudioMarkList filename: ")
+        amlPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
+        Marker.save(self, self.account.name, audio, amlPath)
+
+    def end(self):
+        self.stop()
+        Application.end(self)
+
+
+class Player():
+    
+    CHUNK = 1024
+    CHANNELS = 2
+    RATE = 44100
+
+    def __init__(self):
+        self.audio = None
+        self.stime = 0
+        self.etime = None
+        self.frames = []
+        self.channels = Player.CHANNELS
+        self.rate = Player.RATE
+        self.chunk = Player.CHUNK
+        self.sampwidth = 0
+        self.isPlaying = False
+        self.playingThread = None
+
+    def load(self, account, filepath):
+        self.audio = Audio(account.name, filepath)
         return 0
+
+    def play(self):
+        if self.audio != None and self.isPlaying == False and self.playingThread == None:
+            self.isPlaying = True
+            self.playingThread = Thread(target=self.playing, name="playing thread")
+            self.playingThread.start()
+            return 0
+        return 1
+
+    def playing(self):
+        wf = wave.open(self.audio.path, 'rb')
+        p = pyaudio.PyAudio()
+        self.channels = wf.getnchannels()
+        self.rate = wf.getframerate()
+        self.sampwidth = wf.getsampwidth()
+        stream = p.open(format=p.get_format_from_width(self.sampwidth),
+                        channels=self.channels,
+                        rate=self.rate,
+                        output=True)
+
+
+        spos = self.stime * self.rate
+        if self.etime:
+            epos = self.etime * self.rate
+        wf.setpos(spos)
+
+        self.frames = []
+        data = wf.readframes(self.chunk)
+        while data != '' and self.isPlaying == True:
+            stream.write(data)
+            self.frames.append(data)
+            if self.etime and epos < wf.tell():
+                break
+            data = wf.readframes(self.chunk)
+
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
 
     def stop(self):
-        if RecorderApplication.stop(self) == 0:
-            
-            return 1
-        return 0
+        if self.isPlaying == True and self.playingThread:
+            self.isPlaying = False
+            self.playingThread.join()
+            self.playingThread = None
+            return 0
+        return 1
 
-    def save(self):
-        filename = raw_input("audiodocument filename: ")
-        filepath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
-        with open(filepath, "w+") as f:
-            pickle.dump(self.audiodoc, f)
-        return 0
 
-class SlicerApplication(Application):
+class MarkingPlayerApp(Player, Marker, Application):
 
     def __init__(self, account):
         Application.__init__(self, account)
-        self.appname = "Slicer"
-        self.addMenu("slice", self.slice)
-        self.audio = None
-        self.audioslices = None
-
-    def slice(self):
-        print " *slice"
-        audioName = raw_input("Audio filename: ")
-        audioPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, audioName)
-        self.audio = Audio(audioPath)
-        [Fs, x] = aIO.readAudioFile(audioPath)
-        segments = aS.getEventDetection(x, Fs, 0.020, 0.020, smoothWindow = 0.27, weight = 0.3, plot = False)
-        self.audioslices = AudioSlices(self.audio)
-        for segment in segments:
-            self.audioslices.addSlice(segment[0], segment[1])
-        self.addMenu("save", self.save)
-        return 0
-
-    def save(self):
-        audioslicesName = raw_input("Audioslices filename: ")
-        audioslicesPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, audioslicesName)
-        with open(audioslicesPath, "w+") as f:
-            pickle.dump(self.audioslices, f)
-        return 0
-
-
-class NoteTakerApplication(Application):
-
-    CHUNK = 1024
-
-    def __init__(self, account):
-        Application.__init__(self, account)
-        self.appname = "NoteTakerApplication"
+        Marker.__init__(self)
+        Player.__init__(self)
+        self.appname = "MarkingPlayerApp"
         self.addMenu("load", self.load)
-        self.audioslices = None
-        self.audioslicesIdx = 0
-        self.start
 
     def load(self):
-        audioslicesName = raw_input("Audioslices filename: ")
-        audioslicesPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, audioslicesName)
-        with open(audioslicesPath, "r") as f:
-            self.audioslices = pickle.load(f)
+        filename = raw_input("Audio filename: ")
+        filepath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
+        if Player.load(self, self.account, filepath) == 0:
+            self.removeMenu("load")
             self.addMenu("play", self.play)
-            self.addMenu("next", self.next)
-            self.addMenu("prev", self.prev)
-            self.addMenu("repeat", self.repeat)
             return 0
         return 1
 
     def play(self):
-        wf = wave.open(self.audioslices.audio.name, 'rb')
-        timeInterval = self.audioslices.slicesList[self.audioslicesIdx]
+        if Player.play(self) == 0:
+            Marker.reset(self)
+            self.removeMenu("play")
+            self.addMenu("stop", self.stop)
+            self.addMenu("mark", self.mark)
+            return 0
+        return 1
 
-        p = pyaudio.PyAudio()
-        channels = wf.getframerate()
-        rate = wf.getframerate()
-        sampwidth = wf.getsampwidth()
-        stream = p.open(format=p.get_format_from_width(sampwidth),
-                        channels=channels,
-                        rate=rate,
-                        output=True)
+    def stop(self):
+        if Player.stop(self) == 0:
+            self.removeMenu("stop")
+            self.removeMenu("mark")
+            self.addMenu("play", self.play)
+            self.addMenu("save", self.save)
+            return 0
+        return 1
 
-        print "getframerate: %d\n", wf.getframerate()
-        print "getnframes: %d\n", wf.getnframes()
-        print "tell: %d\n", wf.tell()
+    def mark(self):
+        timestamp = numpy.divide(len(self.frames) * self.chunk, self.rate, dtype=numpy.float64)
+        print "* mark at %f" % (timestamp)
+        Marker.mark(self, self.account.name, timestamp)
 
-        data = wf.readframes(NoteTakerApplication.CHUNK)
-        print "tell: %d\n", wf.tell()
+    def save(self):
+        amlName = raw_input("AudioMarkList filename: ")
+        amlPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
+        Marker.save(self, self.account.name, self.audio, amlPath)
 
-        while data != '':
-            stream.write(data)
-            data = wf.readframes(NoteTakerApplication.CHUNK)
-            print "tell: %d\n", wf.tell()
+    def end(self):
+        self.stop()
+        Application.end(self)
 
-        stream.stop_stream()
-        stream.close()
 
-        p.terminate()
+class AudioSplitterApp(Application):
+
+    def __init__(self, account):
+        Application.__init__(self, account)
+        self.appname = "AudioSplitterApp"
+        self.addMenu("load", self.load)
+        self.audio = None
+        self.sentenceList = list()
+
+    def load(self):
+        filename = raw_input("Audio filename: ")
+        filepath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
+        self.audio = Audio(self.account.name, filepath)
+        self.removeMenu("load")
+        self.addMenu("split", self.split)
+        return 0
+
+    def split(self):
+        [Fs, x] = aIO.readAudioFile(self.audio.path)
+        segments = aS.getEventDetection(x, Fs, 0.020, 0.020, smoothWindow = 0.27, weight = 0.3, plot = False)
+        for segment in segments:
+            self.sentenceList.append(TimeInterval(segment[0], segment[1]))
+        self.removeMenu("split")
+        self.addMenu("save", self.save)
+        return 0
+
+    def save(self):
+        splittedAudioName = raw_input("Splitted audio filename: ")
+        splittedAudioPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.sa" % (self.account.name, splittedAudioName)
+        splittedAudio = SplittedAudio(self.account.name, self.audio, self.sentenceList)
+        with open(splittedAudioPath, "w+") as f:
+            pickle.dump(splittedAudio, f)
+        return 0
+
+
+class SplittedAudioPlayerApp(Player, Application):
+
+    def __init__(self, account):
+        Application.__init__(self, account)
+        Player.__init__(self)
+        self.appname = "SplittedAudioPlayerApp"
+        self.addMenu("load", self.load)
+        self.splittedAudio = None
+        self.sentenceIdx = 0
+
+    def load(self):
+        splittedAudioName = raw_input("Splitted Audio filename: ")
+        splittedAudioPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, splittedAudioName)
+        with open(splittedAudioPath, "r") as f:
+            self.splittedAudio = pickle.load(f)
+            if Player.load(self, self.account, self.splittedAudio.audio.path) == 0:
+                self.removeMenu("load")
+                self.addMenu("play", self.play)
+                self.addMenu("stop", self.stop)
+                self.addMenu("next", self.next)
+                self.sentenceIdx = 0
+                return 0
+        return 1
+
+    def play(self):
+        self.stime = self.splittedAudio.sentenceList[self.sentenceIdx].stime
+        self.etime = self.splittedAudio.sentenceList[self.sentenceIdx].etime
+        self.stop()
+        if Player.play(self) == 0:
+            return 0
+        return 1
 
     def next(self):
-        self.audioslicesIdx = self.audioslicesIdx + 1
+        self.addMenu("prev", self.prev)
+        if self.sentenceIdx < len(self.splittedAudio.sentenceList) - 1:
+            self.sentenceIdx = self.sentenceIdx + 1
+            if self.sentenceIdx == len(self.splittedAudio.sentenceList) - 1:
+                self.removeMenu("next")
+            self.play()
 
     def prev(self):
-        self.audioslicesIdx = self.audioslicesIdx - 1
+        self.addMenu("next", self.next)
+        if self.sentenceIdx > 0:
+            self.sentenceIdx = self.sentenceIdx - 1
+            if self.sentenceIdx == 0:
+                self.removeMenu("prev")
+            self.play()
 
-    def repeat(self):
-        self.play()
+    def end(self):
+        self.stop()
+        Application.end(self)
 
 
-def main3():
-    import pyaudio
-    import wave
-    import sys
+class AudioMarkListPlayer(SplittedAudioPlayerApp):
 
-    CHUNK = 1024
+    def __init__(self, account):
+        SplittedAudioPlayerApp.__init__(self, account)
+        self.appname = "AudioMarkListPlayer"
+        self.addMenu("load", self.load)
+        self.aml = None
+        self.markIdx = 0
 
-    wf = wave.open("output.wav", 'rb')
+    def load(self):
+        if SplittedAudioPlayerApp.load(self) == 0:
+            amlName = raw_input("AudioMarkList filename: ")
+            amlPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, amlName)
+            with open(amlPath, "r") as f:
+                self.aml = pickle.load(f)
+                print "aml: ", self.aml
+                self.removeMenu("load")
+                self.addMenu("nextMark", self.nextMark)
+                self.firstMark()
+                return 0
+        return 1
 
-    p = pyaudio.PyAudio()
+    def findSentenceForMark(self, mark):
+        for sentenceIdx, sentence in enumerate(self.splittedAudio.sentenceList):
+            if sentence.stime <= mark.timestamp and mark.timestamp <= sentence.etime:
+                return sentenceIdx
+        return -1
 
-    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-                    channels=wf.getnchannels(),
-                    rate=wf.getframerate(),
-                    output=True)
+    def firstMark(self):
+        sentenceIdx = self.findSentenceForMark(self.aml.markList[0])
+        if sentenceIdx:
+            self.sentenceIdx = sentenceIdx
 
-    print("getframerate: %d\n", wf.getframerate())
-    print("getnframes: %d\n", wf.getnframes())
-    print("tell: %d\n", wf.tell())
-    data = wf.readframes(CHUNK)
-    print("tell: %d\n", wf.tell())
-    while data != '':
-        stream.write(data)
-        data = wf.readframes(CHUNK)
-        print("tell: %d\n", wf.tell())
+    def nextMark(self):
+        self.addMenu("prevMark", self.prev)
+        if self.markIdx < len(self.aml.markList) - 1:
+            self.markIdx = self.markIdx + 1
+            if self.markIdx == len(self.aml.markList) - 1:
+                self.removeMenu("nextMark")
+            sentenceIdx = self.findSentenceForMark(self.aml.markList[self.markIdx])
+            if sentenceIdx:
+                self.sentenceIdx = sentenceIdx
+                self.play()
 
-    stream.stop_stream()
-    stream.close()
+    def prevMark(self):
+        self.addMenu("nextMark", self.nextMark)
+        if self.markIdx > 0:
+            self.markIdx = self.markIdx - 1
+            if self.markIdx == 0:
+                self.removeMenu("prevMark")
+            sentenceIdx = self.findSentenceForMark(self.aml.markList[self.markIdx])
+            if sentenceIdx:
+                self.sentenceIdx = sentenceIdx
+                self.play()
 
-    p.terminate()
 
-def record():
-    command = ""
-    recorder = SpeechNoteRecorder()
-    recorder.start()
-    while command != "S":
-        command = raw_input("Next command [N/S]: ")
-        if command == "":
-            timing = recorder.getTiming()
-            bookmark = TimeStamp(timing)
-            recorder.addBookmark(bookmark)
-            print "Note at %f!" % timing
-    recorder.stop()
-    recorder.save("output2.wav")
-    print recorder
-
-def main5():
+def main():
     bashapp = BashApplication(None)
     result = bashapp.execute()
 
 if __name__ == "__main__":
-    main5()
+    main()
