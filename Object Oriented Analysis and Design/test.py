@@ -148,7 +148,7 @@ class BashApplication(Application):
         Application.__init__(self, account)
         self.appname = "Bash"
         self.runningApp = None
-        self.loginAppList = [("logout", self.logout), ("markingRecorder", self.markingRecorder), ("markingPlayer", self.markingPlayer), ("audioSplitter", self.audioSplitter), ("splittedAudioPlayer", self.splittedAudioPlayer), ("audioMarkListPlayer", self.audioMarkListPlayer)]
+        self.loginAppList = [("logout", self.logout), ("recorder", self.recorder), ("player", self.player), ("markingRecorder", self.markingRecorder), ("markingPlayer", self.markingPlayer), ("audioSplitter", self.audioSplitter), ("splittedAudioPlayer", self.splittedAudioPlayer), ("audioMarkListPlayer", self.audioMarkListPlayer)]
         self.logoutAppList = [("login", self.login)]
         if account is None:
             self.changeState(False)
@@ -189,6 +189,13 @@ class BashApplication(Application):
         self.account = None
         self.changeState(False)
         return 0
+
+    def recorder(self):
+        self.runningApp = RecorderApp(self.account)
+        return 0
+
+    def player(self):
+        self.runningApp = PlayerApp(self.account)
 
     def markingRecorder(self):
         self.runningApp = MarkingRecorderApp(self.account)
@@ -293,31 +300,57 @@ class Marker():
             pickle.dump(audioMarkList, f)
         return audioMarkList
 
-
-class MarkingRecorderApp(Recorder, Marker, Application):
+class RecorderApp(Recorder, Application):
 
     def __init__(self, account):
         Application.__init__(self, account)
-        Marker.__init__(self)
         Recorder.__init__(self)
-        self.appname = "MarkingRecorderApp"
+        self.appname = "RecorderApp"
         self.addMenu("record", self.record)
 
     def record(self):
         if Recorder.record(self) == 0:
-            self.markList = list()
             self.removeMenu("record")
             self.addMenu("stop", self.stop)
-            self.addMenu("mark", self.mark)
             return 0
         return 1
 
     def stop(self):
         if Recorder.stop(self) == 0:
             self.removeMenu("stop")
-            self.removeMenu("mark")
             self.addMenu("record", self.record)
             self.addMenu("save", self.save)
+            return 0
+        return 1
+
+    def save(self):
+        recorderName = raw_input("Recorder filename: ")
+        recorderPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.wav" % (self.account.name, recorderName)
+        audio = Recorder.save(self, self.account.name, recorderPath)
+        return audio
+
+    def end(self):
+        self.stop()
+        Application.end(self)
+
+
+class MarkingRecorderApp(RecorderApp, Marker):
+
+    def __init__(self, account):        
+        Marker.__init__(self)
+        RecorderApp.__init__(self, account)
+        self.appname = "MarkingRecorderApp"
+
+    def record(self):
+        if RecorderApp.record(self) == 0:
+            self.markList = list()
+            self.addMenu("mark", self.mark)
+            return 0
+        return 1
+
+    def stop(self):
+        if RecorderApp.stop(self) == 0:            
+            self.removeMenu("mark")
             return 0
         return 1
 
@@ -327,18 +360,12 @@ class MarkingRecorderApp(Recorder, Marker, Application):
         Marker.mark(self, self.account.name, timestamp)
 
     def save(self):
-        recorderName = raw_input("Recorder filename: ")
-        recorderPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.wav" % (self.account.name, recorderName)
-        audio = Recorder.save(self, self.account.name, recorderPath)
+        audio = RecorderApp.save(self)
         
         amlName = raw_input("AudioMarkList filename: ")
-        amlPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
+        amlPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
         Marker.save(self, self.account.name, audio, amlPath)
-
-    def end(self):
-        self.stop()
-        Application.end(self)
-
+        
 
 class Player():
     
@@ -409,18 +436,17 @@ class Player():
         return 1
 
 
-class MarkingPlayerApp(Player, Marker, Application):
+class PlayerApp(Player, Application):
 
     def __init__(self, account):
         Application.__init__(self, account)
-        Marker.__init__(self)
         Player.__init__(self)
-        self.appname = "MarkingPlayerApp"
+        self.appname = "PlayerApp"
         self.addMenu("load", self.load)
 
     def load(self):
         filename = raw_input("Audio filename: ")
-        filepath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
+        filepath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
         if Player.load(self, self.account, filepath) == 0:
             self.removeMenu("load")
             self.addMenu("play", self.play)
@@ -429,18 +455,40 @@ class MarkingPlayerApp(Player, Marker, Application):
 
     def play(self):
         if Player.play(self) == 0:
-            Marker.reset(self)
             self.removeMenu("play")
             self.addMenu("stop", self.stop)
-            self.addMenu("mark", self.mark)
             return 0
         return 1
 
     def stop(self):
         if Player.stop(self) == 0:
             self.removeMenu("stop")
-            self.removeMenu("mark")
             self.addMenu("play", self.play)
+            return 0
+        return 1
+
+    def end(self):
+        self.stop()
+        Application.end(self)
+
+
+class MarkingPlayerApp(PlayerApp, Marker):
+
+    def __init__(self, account):
+        Marker.__init__(self)
+        PlayerApp.__init__(self, account)
+        self.appname = "MarkingPlayerApp"
+
+    def play(self):
+        if PlayerApp.play(self) == 0:
+            Marker.reset(self)
+            self.addMenu("mark", self.mark)
+            return 0
+        return 1
+
+    def stop(self):
+        if PlayerApp.stop(self) == 0:
+            self.removeMenu("mark")
             self.addMenu("save", self.save)
             return 0
         return 1
@@ -452,12 +500,8 @@ class MarkingPlayerApp(Player, Marker, Application):
 
     def save(self):
         amlName = raw_input("AudioMarkList filename: ")
-        amlPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
+        amlPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
         Marker.save(self, self.account.name, self.audio, amlPath)
-
-    def end(self):
-        self.stop()
-        Application.end(self)
 
 
 class AudioSplitterApp(Application):
@@ -471,7 +515,7 @@ class AudioSplitterApp(Application):
 
     def load(self):
         filename = raw_input("Audio filename: ")
-        filepath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
+        filepath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
         self.audio = Audio(self.account.name, filepath)
         self.removeMenu("load")
         self.addMenu("split", self.split)
@@ -488,7 +532,7 @@ class AudioSplitterApp(Application):
 
     def save(self):
         splittedAudioName = raw_input("Splitted audio filename: ")
-        splittedAudioPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s.sa" % (self.account.name, splittedAudioName)
+        splittedAudioPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.sa" % (self.account.name, splittedAudioName)
         splittedAudio = SplittedAudio(self.account.name, self.audio, self.sentenceList)
         with open(splittedAudioPath, "w+") as f:
             pickle.dump(splittedAudio, f)
@@ -507,7 +551,7 @@ class SplittedAudioPlayerApp(Player, Application):
 
     def load(self):
         splittedAudioName = raw_input("Splitted Audio filename: ")
-        splittedAudioPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, splittedAudioName)
+        splittedAudioPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, splittedAudioName)
         with open(splittedAudioPath, "r") as f:
             self.splittedAudio = pickle.load(f)
             if Player.load(self, self.account, self.splittedAudio.audio.path) == 0:
@@ -560,7 +604,7 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
     def load(self):
         if SplittedAudioPlayerApp.load(self) == 0:
             amlName = raw_input("AudioMarkList filename: ")
-            amlPath = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, amlName)
+            amlPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, amlName)
             with open(amlPath, "r") as f:
                 self.aml = pickle.load(f)
                 print "aml: ", self.aml
