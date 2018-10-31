@@ -1,4 +1,5 @@
 import datetime
+import os
 # For recording and playing
 from threading import Thread
 import pyaudio
@@ -10,7 +11,7 @@ import os
 from pyAudioAnalysis import audioBasicIO as aIO
 from pyAudioAnalysis import audioSegmentation as aS
 
-USERHOME = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design"
+USERHOME = os.path.dirname(os.path.realpath(__file__))
 
 class TimeStamp():
 
@@ -327,7 +328,7 @@ class RecorderApp(Recorder, Application):
 
     def save(self):
         recorderName = raw_input("Recorder filename: ")
-        recorderPath = USERHOME + "/%s/%s.wav" % (self.account.name, recorderName)
+        recorderPath = os.path.join(USERHOME, self.account.name, "%s.wav" % recorderName)
         audio = Recorder.save(self, self.account.name, recorderPath)
         return audio
 
@@ -364,7 +365,7 @@ class MarkingRecorderApp(RecorderApp, Marker):
     def save(self):
         audio = RecorderApp.save(self)
         amlName = raw_input("AudioMarkList filename: ")
-        amlPath = USERHOME + "/%s/%s.aml" % (self.account.name, amlName)
+        amlPath = os.path.join(USERHOME, self.account.name, "%s.aml" % amlName)
         Marker.save(self, self.account.name, audio, amlPath)
         
 
@@ -447,7 +448,7 @@ class PlayerApp(Player, Application):
 
     def load(self):
         filename = raw_input("Audio filename: ")
-        filepath = USERHOME + "/%s/%s" % (self.account.name, filename)
+        filepath = os.path.join(USERHOME, self.account.name, filename)
         if Player.load(self, self.account, filepath) == 0:
             self.removeMenu("load")
             self.addMenu("play", self.play)
@@ -501,7 +502,7 @@ class MarkingPlayerApp(PlayerApp, Marker):
 
     def save(self):
         amlName = raw_input("AudioMarkList filename: ")
-        amlPath = USERHOME + "/%s/%s.aml" % (self.account.name, amlName)
+        amlPath = os.path.join(USERHOME, self.account.name, "%s.aml" % amlName)
         Marker.save(self, self.account.name, self.audio, amlPath)
 
 
@@ -516,7 +517,7 @@ class AudioSplitterApp(Application):
 
     def load(self):
         filename = raw_input("Audio filename: ")
-        filepath = USERHOME + "/%s/%s" % (self.account.name, filename)
+        filepath = os.path.join(USERHOME, self.account.name, filename)
         self.audio = Audio(self.account.name, filepath)
         self.removeMenu("load")
         self.addMenu("split", self.split)
@@ -533,7 +534,7 @@ class AudioSplitterApp(Application):
 
     def save(self):
         splittedAudioName = raw_input("Splitted audio filename: ")
-        splittedAudioPath = USERHOME + "/%s/%s.sa" % (self.account.name, splittedAudioName)
+        splittedAudioPath = os.path.join(USERHOME, self.account.name, "%s.sa" % splittedAudioName)
         splittedAudio = SplittedAudio(self.account.name, self.audio, self.sentenceList)
         with open(splittedAudioPath, "w+") as f:
             pickle.dump(splittedAudio, f)
@@ -552,7 +553,7 @@ class SplittedAudioPlayerApp(Player, Application):
 
     def load(self):
         splittedAudioName = raw_input("Splitted Audio filename: ")
-        splittedAudioPath = USERHOME + "/%s/%s" % (self.account.name, splittedAudioName)
+        splittedAudioPath = os.path.join(USERHOME, self.account.name, splittedAudioName)
         with open(splittedAudioPath, "r") as f:
             self.splittedAudio = pickle.load(f)
             if Player.load(self, self.account, self.splittedAudio.audio.path) == 0:
@@ -598,7 +599,7 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
     def load(self):
         if SplittedAudioPlayerApp.load(self) == 0:
             amlName = raw_input("AudioMarkList filename: ")
-            amlPath = USERHOME + "/%s/%s" % (self.account.name, amlName)
+            amlPath = os.path.join(USERHOME, self.account.name, amlName)
             with open(amlPath, "r") as f:
                 self.aml = pickle.load(f)
                 self.addMenu("prevMark", self.prevMark)
