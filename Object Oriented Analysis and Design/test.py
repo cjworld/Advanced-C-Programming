@@ -10,6 +10,7 @@ import os
 from pyAudioAnalysis import audioBasicIO as aIO
 from pyAudioAnalysis import audioSegmentation as aS
 
+USERHOME = "/Users/ChiYuChen/UCSC extension/Object Oriented Analysis and Design"
 
 class TimeStamp():
 
@@ -300,6 +301,7 @@ class Marker():
             pickle.dump(audioMarkList, f)
         return audioMarkList
 
+
 class RecorderApp(Recorder, Application):
 
     def __init__(self, account):
@@ -325,7 +327,7 @@ class RecorderApp(Recorder, Application):
 
     def save(self):
         recorderName = raw_input("Recorder filename: ")
-        recorderPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.wav" % (self.account.name, recorderName)
+        recorderPath = USERHOME + "/%s/%s.wav" % (self.account.name, recorderName)
         audio = Recorder.save(self, self.account.name, recorderPath)
         return audio
 
@@ -343,7 +345,7 @@ class MarkingRecorderApp(RecorderApp, Marker):
 
     def record(self):
         if RecorderApp.record(self) == 0:
-            self.markList = list()
+            Marker.reset(self)
             self.addMenu("mark", self.mark)
             return 0
         return 1
@@ -361,9 +363,8 @@ class MarkingRecorderApp(RecorderApp, Marker):
 
     def save(self):
         audio = RecorderApp.save(self)
-        
         amlName = raw_input("AudioMarkList filename: ")
-        amlPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
+        amlPath = USERHOME + "/%s/%s.aml" % (self.account.name, amlName)
         Marker.save(self, self.account.name, audio, amlPath)
         
 
@@ -446,7 +447,7 @@ class PlayerApp(Player, Application):
 
     def load(self):
         filename = raw_input("Audio filename: ")
-        filepath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
+        filepath = USERHOME + "/%s/%s" % (self.account.name, filename)
         if Player.load(self, self.account, filepath) == 0:
             self.removeMenu("load")
             self.addMenu("play", self.play)
@@ -500,7 +501,7 @@ class MarkingPlayerApp(PlayerApp, Marker):
 
     def save(self):
         amlName = raw_input("AudioMarkList filename: ")
-        amlPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.aml" % (self.account.name, amlName)
+        amlPath = USERHOME + "/%s/%s.aml" % (self.account.name, amlName)
         Marker.save(self, self.account.name, self.audio, amlPath)
 
 
@@ -515,7 +516,7 @@ class AudioSplitterApp(Application):
 
     def load(self):
         filename = raw_input("Audio filename: ")
-        filepath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, filename)
+        filepath = USERHOME + "/%s/%s" % (self.account.name, filename)
         self.audio = Audio(self.account.name, filepath)
         self.removeMenu("load")
         self.addMenu("split", self.split)
@@ -532,7 +533,7 @@ class AudioSplitterApp(Application):
 
     def save(self):
         splittedAudioName = raw_input("Splitted audio filename: ")
-        splittedAudioPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s.sa" % (self.account.name, splittedAudioName)
+        splittedAudioPath = USERHOME + "/%s/%s.sa" % (self.account.name, splittedAudioName)
         splittedAudio = SplittedAudio(self.account.name, self.audio, self.sentenceList)
         with open(splittedAudioPath, "w+") as f:
             pickle.dump(splittedAudio, f)
@@ -551,13 +552,14 @@ class SplittedAudioPlayerApp(Player, Application):
 
     def load(self):
         splittedAudioName = raw_input("Splitted Audio filename: ")
-        splittedAudioPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, splittedAudioName)
+        splittedAudioPath = USERHOME + "/%s/%s" % (self.account.name, splittedAudioName)
         with open(splittedAudioPath, "r") as f:
             self.splittedAudio = pickle.load(f)
             if Player.load(self, self.account, self.splittedAudio.audio.path) == 0:
                 self.removeMenu("load")
                 self.addMenu("play", self.play)
                 self.addMenu("stop", self.stop)
+                self.addMenu("prev", self.prev)
                 self.addMenu("next", self.next)
                 self.sentenceIdx = 0
                 return 0
@@ -572,19 +574,13 @@ class SplittedAudioPlayerApp(Player, Application):
         return 1
 
     def next(self):
-        self.addMenu("prev", self.prev)
         if self.sentenceIdx < len(self.splittedAudio.sentenceList) - 1:
             self.sentenceIdx = self.sentenceIdx + 1
-            if self.sentenceIdx == len(self.splittedAudio.sentenceList) - 1:
-                self.removeMenu("next")
             self.play()
 
     def prev(self):
-        self.addMenu("next", self.next)
         if self.sentenceIdx > 0:
             self.sentenceIdx = self.sentenceIdx - 1
-            if self.sentenceIdx == 0:
-                self.removeMenu("prev")
             self.play()
 
     def end(self):
@@ -597,22 +593,33 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
     def __init__(self, account):
         SplittedAudioPlayerApp.__init__(self, account)
         self.appname = "AudioMarkListPlayer"
-        self.addMenu("load", self.load)
         self.aml = None
-        self.markIdx = 0
 
     def load(self):
         if SplittedAudioPlayerApp.load(self) == 0:
             amlName = raw_input("AudioMarkList filename: ")
-            amlPath = "/Users/User/Documents/GitHub/UCSC-Extension/Object Oriented Analysis and Design/%s/%s" % (self.account.name, amlName)
+            amlPath = USERHOME + "/%s/%s" % (self.account.name, amlName)
             with open(amlPath, "r") as f:
                 self.aml = pickle.load(f)
-                print "aml: ", self.aml
-                self.removeMenu("load")
+                self.addMenu("prevMark", self.prevMark)
                 self.addMenu("nextMark", self.nextMark)
-                self.firstMark()
                 return 0
         return 1
+
+    def seekNextMarkSentence(self):
+        sentence = self.splittedAudio.sentenceList[self.sentenceIdx]
+        for markIdx, mark in enumerate(self.aml.markList):
+            if sentence.etime <= mark.timestamp:
+                return markIdx
+        return -1
+
+    def seekPrevMarkSentence(self):
+        sentence = self.splittedAudio.sentenceList[self.sentenceIdx]
+        for markIdx in range(len(self.aml.markList) - 1, -1, -1):
+            mark = self.aml.markList[markIdx]
+            if mark.timestamp <= sentence.stime:
+                return markIdx
+        return -1
 
     def findSentenceForMark(self, mark):
         for sentenceIdx, sentence in enumerate(self.splittedAudio.sentenceList):
@@ -620,30 +627,19 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
                 return sentenceIdx
         return -1
 
-    def firstMark(self):
-        sentenceIdx = self.findSentenceForMark(self.aml.markList[0])
-        if sentenceIdx:
-            self.sentenceIdx = sentenceIdx
-
     def nextMark(self):
-        self.addMenu("prevMark", self.prev)
-        if self.markIdx < len(self.aml.markList) - 1:
-            self.markIdx = self.markIdx + 1
-            if self.markIdx == len(self.aml.markList) - 1:
-                self.removeMenu("nextMark")
-            sentenceIdx = self.findSentenceForMark(self.aml.markList[self.markIdx])
-            if sentenceIdx:
+        markIdx = self.seekNextMarkSentence()
+        if markIdx != -1:
+            sentenceIdx = self.findSentenceForMark(self.aml.markList[markIdx])
+            if sentenceIdx != -1:
                 self.sentenceIdx = sentenceIdx
                 self.play()
 
     def prevMark(self):
-        self.addMenu("nextMark", self.nextMark)
-        if self.markIdx > 0:
-            self.markIdx = self.markIdx - 1
-            if self.markIdx == 0:
-                self.removeMenu("prevMark")
-            sentenceIdx = self.findSentenceForMark(self.aml.markList[self.markIdx])
-            if sentenceIdx:
+        markIdx = self.seekPrevMarkSentence()
+        if markIdx != -1:
+            sentenceIdx = self.findSentenceForMark(self.aml.markList[markIdx])
+            if sentenceIdx != -1:
                 self.sentenceIdx = sentenceIdx
                 self.play()
 
