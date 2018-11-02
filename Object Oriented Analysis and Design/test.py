@@ -144,7 +144,7 @@ class Application(object):
         return (self.running is True)
 
 
-class BashApplication(Application):
+class BashApp(Application):
 
     def __init__(self, account):
         Application.__init__(self, account)
@@ -216,7 +216,7 @@ class BashApplication(Application):
         return 0
 
     def audioMarkListPlayer(self):
-        self.runningApp = AudioMarkListPlayer(self.account)
+        self.runningApp = AudioMarkListPlayerApp(self.account)
         return 0
 
 
@@ -589,7 +589,7 @@ class SplittedAudioPlayerApp(Player, Application):
         Application.end(self)
 
 
-class AudioMarkListPlayer(SplittedAudioPlayerApp):
+class AudioMarkListPlayerApp(SplittedAudioPlayerApp):
 
     def __init__(self, account):
         SplittedAudioPlayerApp.__init__(self, account)
@@ -646,7 +646,7 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
 
 
 def main():
-    bashapp = BashApplication(None)
+    bashapp = BashApp(None)
     result = bashapp.execute()
 
 if __name__ == "__main__":
