@@ -159,8 +159,7 @@ class Application(object):
         return (self.running is True)
 
 
-<<<<<<< HEAD
-class BashApplication(Application):
+class BashApp(Application):
 	"""
 	In this function, it show the list of menu and creates instances corresponding to the selected menu.
 
@@ -169,10 +168,7 @@ class BashApplication(Application):
 		- changeState : True means user has logged in and vice versa for false 
 		- execute : After creating instances, it will come here to be execute
 	"""
-=======
-class BashApp(Application):
 
->>>>>>> f0e830775dd036729ff94198f4c33f59a427abc3
     def __init__(self, account):
         Application.__init__(self, account) #Calls the Application constructor
         self.appname = "Bash"
@@ -675,8 +671,7 @@ class SplittedAudioPlayerApp(Player, Application):
         Application.end(self)
 
 
-<<<<<<< HEAD
-class AudioMarkListPlayer(SplittedAudioPlayerApp):
+class AudioMarkListPlayerApp(SplittedAudioPlayerApp):
 	"""
 	This function ask user for .aml file (AudioMarkList file) and load it. 
 	User can choose to play the previous mark or the next mark.
@@ -690,9 +685,6 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
 
 	
 	"""
-=======
-class AudioMarkListPlayerApp(SplittedAudioPlayerApp):
->>>>>>> f0e830775dd036729ff94198f4c33f59a427abc3
 
     def __init__(self, account):
         SplittedAudioPlayerApp.__init__(self, account)
