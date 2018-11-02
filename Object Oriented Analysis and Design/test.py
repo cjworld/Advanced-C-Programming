@@ -11,15 +11,24 @@ import os
 from pyAudioAnalysis import audioBasicIO as aIO
 from pyAudioAnalysis import audioSegmentation as aS
 
+#Create a shortcut command for the directory of the userhome. 
+#Used later to concatenate with file strings and create a path to save or obtain files
 USERHOME = os.path.dirname(os.path.realpath(__file__))
 
+
 class TimeStamp():
+	"""
+	This function collects the timestamp of the marked audio
+	"""
 
     def __init__(self, time):
         self.time = time
 
 
 class TimeInterval():
+	"""
+	This function takes the start and end time of the audio sentence
+	"""
 
     def __init__(self, stime, etime):
         self.stime = stime
@@ -33,6 +42,9 @@ class TimeInterval():
 
 
 class Account():
+	"""
+	This function use the user's name after login session 
+	"""
 
     def __init__(self, name):
         self.name = name
@@ -100,6 +112,9 @@ class AudioMarkList(Metadata):
 
 
 class Application(object):
+	"""
+	This function show the menu on the command window and execute the instances created by functions in BashApplication
+	"""
 
     def __init__(self, account):
         self.running = False
@@ -145,12 +160,19 @@ class Application(object):
 
 
 class BashApplication(Application):
+	"""
+	In this function, it show the list of menu and creates instances corresponding to the selected menu.
 
+		- login : Ask user for account name 
+		- logout : Remove the user's name from the account
+		- changeState : True means user has logged in and vice versa for false 
+		- execute : After creating instances, it will come here to be execute
+	"""
     def __init__(self, account):
-        Application.__init__(self, account)
+        Application.__init__(self, account) #Calls the Application constructor
         self.appname = "Bash"
         self.runningApp = None
-        self.loginAppList = [("logout", self.logout), ("recorder", self.recorder), ("player", self.player), ("markingRecorder", self.markingRecorder), ("markingPlayer", self.markingPlayer), ("audioSplitter", self.audioSplitter), ("splittedAudioPlayer", self.splittedAudioPlayer), ("audioMarkListPlayer", self.audioMarkListPlayer)]
+        self.loginAppList = [("logout", self.logout), ("markingRecorder", self.markingRecorder), ("markingPlayer", self.markingPlayer), ("audioSplitter", self.audioSplitter), ("audioMarkListPlayer", self.audioMarkListPlayer)]
         self.logoutAppList = [("login", self.login)]
         if account is None:
             self.changeState(False)
@@ -191,7 +213,8 @@ class BashApplication(Application):
         self.account = None
         self.changeState(False)
         return 0
-
+		
+	#Based on the user's input, it calls its specific functions shown below and create instances
     def recorder(self):
         self.runningApp = RecorderApp(self.account)
         return 0
@@ -219,14 +242,24 @@ class BashApplication(Application):
         self.runningApp = AudioMarkListPlayer(self.account)
         return 0
 
-
+ 
 class Recorder():
+
+	"""
+	This function is used to start recording the audio.Recorder class contains all the functions to record, stop, and save the audio
+
+		- record : create a thread and calls recording function.
+		- recording : thread runs here and break the thread once the stop function tells it to stop.
+		- stop : when user wants to stop the player, this function calls recording function and tell it to stop the thread.
+		- save : save the audio recording.
+	"""
 
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
 
+	#Initialize all the variables inside the constructor
     def __init__(self):
         self.isRecording = False
         self.MAXSECONDS = 60 * 60 * 5
@@ -239,6 +272,7 @@ class Recorder():
         self.frames = []
         self.recordingThread = None
 
+	#Change the state whether it is recording or not
     def record(self):
         if self.isRecording == False and self.recordingThread == None:
             self.isRecording = True
@@ -285,7 +319,9 @@ class Recorder():
 
 
 class Marker():
-
+	"""
+	In this function, it create markers on the audio and collect its timestamps
+	"""
     def __init__(self):
         self.markList = list()
 
@@ -304,7 +340,10 @@ class Marker():
 
 
 class RecorderApp(Recorder, Application):
-
+	"""
+	In this function, it calls the parent 'Recorder' to record and stop. Then when it needs to save, it prompts the user to enter recorder filename.
+	
+	"""
     def __init__(self, account):
         Application.__init__(self, account)
         Recorder.__init__(self)
@@ -338,6 +377,11 @@ class RecorderApp(Recorder, Application):
 
 
 class MarkingRecorderApp(RecorderApp, Marker):
+	"""
+	In this function, it create marks on the recorder and show the time where it is marked.
+	When the user want to save the marked recorded audio, it prompts the user for the filename and then creates a new audioMarkList file.
+	
+	"""
 
     def __init__(self, account):        
         Marker.__init__(self)
@@ -368,8 +412,16 @@ class MarkingRecorderApp(RecorderApp, Marker):
         amlPath = os.path.join(USERHOME, self.account.name, "%s.aml" % amlName)
         Marker.save(self, self.account.name, audio, amlPath)
         
-
+ 
 class Player():
+	"""
+	This function is used to load audio and play. It has the properties of load, play, and stop.
+
+		- load : load the audio into the player
+		- play : create a thread and calls playing function
+		- playing : thread runs here and break the thread once the stop function tells it to stop
+		- stop : when user wants to stop the player, this function calls playing and tell it to stop the thread.
+	"""
     
     CHUNK = 1024
     CHANNELS = 2
@@ -391,6 +443,7 @@ class Player():
         self.audio = Audio(account.name, filepath)
         return 0
 
+		
     def play(self):
         if self.audio != None and self.isPlaying == False and self.playingThread == None:
             self.isPlaying = True
@@ -399,6 +452,7 @@ class Player():
             return 0
         return 1
 
+		
     def playing(self):
         wf = wave.open(self.audio.path, 'rb')
         p = pyaudio.PyAudio()
@@ -439,6 +493,10 @@ class Player():
 
 
 class PlayerApp(Player, Application):
+	"""
+	This function prompts the user for the audio file, then call the parent 'Player' to load, play, and stop
+	
+	"""
 
     def __init__(self, account):
         Application.__init__(self, account)
@@ -474,7 +532,14 @@ class PlayerApp(Player, Application):
         Application.end(self)
 
 
+
 class MarkingPlayerApp(PlayerApp, Marker):
+	"""
+	This function create markers on the audio when the user use the Player. It shows all the markers time after it is marked.
+	Then ask user for filename when it saves all the markers. It then creates a new audioMarkList file.
+	
+	"""
+
 
     def __init__(self, account):
         Marker.__init__(self)
@@ -506,7 +571,12 @@ class MarkingPlayerApp(PlayerApp, Marker):
         Marker.save(self, self.account.name, self.audio, amlPath)
 
 
+
 class AudioSplitterApp(Application):
+	"""
+	This function splits the audio sentence by sentence and then save it as .sa files
+	
+	"""
 
     def __init__(self, account):
         Application.__init__(self, account)
@@ -541,7 +611,14 @@ class AudioSplitterApp(Application):
         return 0
 
 
+
 class SplittedAudioPlayerApp(Player, Application):
+	"""
+	This function takes in .sa(Splitted audio files) to load and play each sentence.
+	It can select previous or next audio sentence to play.
+	It calls the Player to do the action of playing each sentence. 
+	
+	"""
 
     def __init__(self, account):
         Application.__init__(self, account)
@@ -566,6 +643,9 @@ class SplittedAudioPlayerApp(Player, Application):
                 return 0
         return 1
 
+	
+	#Selection of which sentence to play are done here where it can play the previous sentence, next sentence, or current sentence. 
+	#It stops playing once the user enters stops	
     def play(self):
         self.stime = self.splittedAudio.sentenceList[self.sentenceIdx].stime
         self.etime = self.splittedAudio.sentenceList[self.sentenceIdx].etime
@@ -590,6 +670,19 @@ class SplittedAudioPlayerApp(Player, Application):
 
 
 class AudioMarkListPlayer(SplittedAudioPlayerApp):
+	"""
+	This function ask user for .aml file (AudioMarkList file) and load it. 
+	User can choose to play the previous mark or the next mark.
+	It calls SplittedAudioPlayerApp to do the actions of playing the audio that has been marked. 
+
+        - nextMark : calls 'seekNextMarkSentence' , then calls 'findSentenceForMark'. If the audio sentence exist, then send it to play.
+		- prevMark : calls 'seekPrevMarkSentence' , then calls 'findSentenceForMark'. If the audio sentence exist, then send it to play. 
+		- findSentenceForMark : find the specific sentence from the splitted audio based where the mark's timestamp is withen the splitted audio timestamp
+		- seekPrevMarkSentence : find the location of the previous marked sentence
+		- seekNextMarkSentence : find the location of the next marked sentence
+
+	
+	"""
 
     def __init__(self, account):
         SplittedAudioPlayerApp.__init__(self, account)
@@ -645,6 +738,7 @@ class AudioMarkListPlayer(SplittedAudioPlayerApp):
                 self.play()
 
 
+#Program starts here
 def main():
     bashapp = BashApplication(None)
     result = bashapp.execute()
