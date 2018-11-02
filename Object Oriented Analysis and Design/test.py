@@ -428,6 +428,7 @@ class Player():
         stream.stop_stream()
         stream.close()
         p.terminate()
+        wf.close()
 
     def stop(self):
         if self.isPlaying == True and self.playingThread:
@@ -607,14 +608,14 @@ class AudioMarkListPlayerApp(SplittedAudioPlayerApp):
                 return 0
         return 1
 
-    def seekNextMarkSentence(self):
+    def seekNextSentenceWithMark(self):
         sentence = self.splittedAudio.sentenceList[self.sentenceIdx]
         for markIdx, mark in enumerate(self.aml.markList):
             if sentence.etime <= mark.timestamp:
                 return markIdx
         return -1
 
-    def seekPrevMarkSentence(self):
+    def seekPrevSentenceWithMark(self):
         sentence = self.splittedAudio.sentenceList[self.sentenceIdx]
         for markIdx in range(len(self.aml.markList) - 1, -1, -1):
             mark = self.aml.markList[markIdx]
@@ -629,7 +630,7 @@ class AudioMarkListPlayerApp(SplittedAudioPlayerApp):
         return -1
 
     def nextMark(self):
-        markIdx = self.seekNextMarkSentence()
+        markIdx = self.seekNextSentenceWithMark()
         if markIdx != -1:
             sentenceIdx = self.findSentenceForMark(self.aml.markList[markIdx])
             if sentenceIdx != -1:
@@ -637,7 +638,7 @@ class AudioMarkListPlayerApp(SplittedAudioPlayerApp):
                 self.play()
 
     def prevMark(self):
-        markIdx = self.seekPrevMarkSentence()
+        markIdx = self.seekPrevSentenceWithMark()
         if markIdx != -1:
             sentenceIdx = self.findSentenceForMark(self.aml.markList[markIdx])
             if sentenceIdx != -1:
