@@ -1,0 +1,98 @@
+---
+title: "Assignment 4"
+author: "Chi-Yu, Chen"
+date: "2018/7/28"
+output:
+  pdf_document: default
+  html_document: default
+---
+## Load worldrecord.csv and answer the following?
+
+```{r}
+library(dplyr)
+setwd("/Users/ChiYuChen/Data Analysis, Intro/Assignment 4")
+worldrecords <- read.csv("WorldRecords.csv")
+```
+
+## 1. How many different types of events (e.g. "Mens 100m", "Womens Shotput" etc) are represented in the dataset
+```{r}
+q1.1 <- group_by(worldrecords, Event)
+nrow(summarise(q1.1))
+```
+
+
+## 2. In what year did Usain Bolt first break the world record for the Men's 100m?
+```{r}
+q2.1 <- filter(worldrecords, Event=="Mens 100m", Athlete=="Usain Bolt")
+q2.1[1,]$Year
+```
+
+
+## 3. Which variable tells us the record setting time or distance? The variable name in the data set is? What type of the variable is this?
+```{r}
+typeof(worldrecords$Type)
+class(worldrecords$Type)
+```
+
+
+## 4. Create a subset of the dataset that contains only the world record cases for men's shotput and women's shotput
+```{r}
+q4 <- filter(worldrecords, Event=="Mens Shotput" | Event=="Womens Shotput")
+q4
+```
+
+
+## 5. Create a scatter plot of the year and record shotput distance one for men and one for women.
+```{r}
+library(ggplot2)
+q5.m <- filter(q4, Event=="Mens Shotput")
+ggplot(q5.m, aes(x = Year, y = Record))+ geom_point() + labs(title="Mens Shotput")
+q5.w <- filter(q4, Event=="Womens Shotput")
+ggplot(q5.w, aes(x = Year, y = Record))+ geom_point() + labs(title="Womens Shotput")
+```
+
+
+## 6. Find the average/mean time for each event. How many athletes have time more than average in each event.
+```{r}
+q6.1 <- filter(worldrecords, Type=="time")
+q6.2 <- group_by(q6.1, Event)
+summarise(q6.2, Avg=mean(Record))
+q6.4 <- mutate(q6.2, Avg=mean(Record))
+q6.5 <- filter(q6.4, Record > Avg)
+summarise(q6.5, Athletes=n())
+```
+
+
+## 7. Select the athlete who took most time in men's 100m and women's event.
+```{r}
+q7.m.1 <- filter(worldrecords, Event=="Mens 100m")
+q7.m.2 <- filter(q7.m.1, Record==max(Record))
+q7.m.2
+q7.w.1 <- filter(worldrecords, Event=="Womens 100m")
+q7.w.2 <- filter(q7.w.1, Record==max(Record))
+q7.w.2
+```
+
+
+## 8. Which country won maximum times of men's 100m event?
+```{r}
+q8.1 <- filter(worldrecords, Event=="Mens 100m")
+q8.2 <- group_by(q8.1, Nationality)
+q8.3 <- summarize(q8.2, NumberOfRecords=n())
+filter(q8.3, NumberOfRecords == max(NumberOfRecords))
+```
+
+
+## 9. How many athletes are there in each event?
+```{r}
+q9.1 <- group_by(worldrecords, Event)
+summarise(q9.1, Athletes=n_distinct(Athlete))
+```
+
+
+## 10. Which country has maximum wins?
+```{r}
+q10.1 <- group_by(worldrecords, Nationality)
+q10.2 <- summarize(q10.1, NumberOfRecords=n())
+filter(q10.2, NumberOfRecords == max(NumberOfRecords))
+```
