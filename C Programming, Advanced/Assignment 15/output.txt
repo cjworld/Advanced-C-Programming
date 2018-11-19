@@ -1,0 +1,216 @@
+Add OLIVIA to bucket 2
+	 The bucket 2 after updated: OLIVIA(1) -> NULL
+Add AMELIA to bucket 5
+	 The bucket 5 after updated: AMELIA(2) -> NULL
+Add ISLA to bucket 12
+	 The bucket 12 after updated: ISLA(3) -> NULL
+Add EMILY to bucket 9
+	 The bucket 9 after updated: EMILY(4) -> NULL
+Add AVA to bucket 6
+	 The bucket 6 after updated: AVA(5) -> NULL
+Add LILY to bucket 14
+	 The bucket 14 after updated: LILY(6) -> NULL
+Add MIA to bucket 5
+	 The bucket 5 after updated: MIA(7) -> AMELIA(2) -> NULL
+Add SOPHIA to bucket 2
+	 The bucket 2 after updated: SOPHIA(8) -> OLIVIA(1) -> NULL
+Add ISABELLA to bucket 3
+	 The bucket 3 after updated: ISABELLA(9) -> NULL
+Add GRACE to bucket 9
+	 The bucket 9 after updated: GRACE(10) -> EMILY(4) -> NULL
+Add POPPY to bucket 3
+	 The bucket 3 after updated: POPPY(11) -> ISABELLA(9) -> NULL
+Add ELLA to bucket 1
+	 The bucket 1 after updated: ELLA(12) -> NULL
+Add EVIE to bucket 12
+	 The bucket 12 after updated: EVIE(13) -> ISLA(3) -> NULL
+Add CHARLOTTE to bucket 3
+	 The bucket 3 after updated: CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Add JESSICA to bucket 4
+	 The bucket 4 after updated: JESSICA(15) -> NULL
+Add DAISY to bucket 3
+	 The bucket 3 after updated: DAISY(16) -> CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Add SOPHIE to bucket 6
+	 The bucket 6 after updated: SOPHIE(17) -> AVA(5) -> NULL
+Add FREYA to bucket 0
+	 The bucket 0 after updated: FREYA(18) -> NULL
+Add ALICE to bucket 5
+	 The bucket 5 after updated: ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Add SIENNA to bucket 11
+	 The bucket 11 after updated: SIENNA(20) -> NULL
+Add IVY to bucket 8
+	 The bucket 8 after updated: IVY(21) -> NULL
+Add HARPER to bucket 0
+	 The bucket 0 after updated: HARPER(22) -> FREYA(18) -> NULL
+Add RUBY to bucket 7
+	 The bucket 7 after updated: RUBY(23) -> NULL
+Add ISABELLE to bucket 7
+	 The bucket 7 after updated: ISABELLE(24) -> RUBY(23) -> NULL
+Add WILLOW to bucket 13
+	 The bucket 13 after updated: WILLOW(25) -> NULL
+Add PHOEBE to bucket 0
+	 The bucket 0 after updated: PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Add EVELYN to bucket 2
+	 The bucket 2 after updated: EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add SCARLETT to bucket 10
+	 The bucket 10 after updated: SCARLETT(28) -> NULL
+Add CHLOE to bucket 3
+	 The bucket 3 after updated: CHLOE(29) -> DAISY(16) -> CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Add FLORENCE to bucket 5
+	 The bucket 5 after updated: FLORENCE(30) -> ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Add ELSIE to bucket 10
+	 The bucket 10 after updated: ELSIE(31) -> SCARLETT(28) -> NULL
+Add MILLIE to bucket 9
+	 The bucket 9 after updated: MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Add LAYLA to bucket 11
+	 The bucket 11 after updated: LAYLA(33) -> SIENNA(20) -> NULL
+Add MATILDA to bucket 13
+	 The bucket 13 after updated: MATILDA(34) -> WILLOW(25) -> NULL
+Add ROSIE to bucket 11
+	 The bucket 11 after updated: ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Add ESME to bucket 13
+	 The bucket 13 after updated: ESME(36) -> MATILDA(34) -> WILLOW(25) -> NULL
+Add EVA to bucket 10
+	 The bucket 10 after updated: EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Add LUCY to bucket 2
+	 The bucket 2 after updated: LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add ARIA to bucket 0
+	 The bucket 0 after updated: ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Add ELLIE to bucket 3
+	 The bucket 3 after updated: ELLIE(40) -> CHLOE(29) -> DAISY(16) -> CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Add SOFIA to bucket 10
+	 The bucket 10 after updated: SOFIA(41) -> EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Add MAISIE to bucket 5
+	 The bucket 5 after updated: MAISIE(42) -> FLORENCE(30) -> ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Add ERIN to bucket 2
+	 The bucket 2 after updated: ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add LOLA to bucket 11
+	 The bucket 11 after updated: LOLA(44) -> ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Add LILLY to bucket 0
+	 The bucket 0 after updated: LILLY(45) -> ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Add THEA to bucket 5
+	 The bucket 5 after updated: THEA(46) -> MAISIE(42) -> FLORENCE(30) -> ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Add IMOGEN to bucket 12
+	 The bucket 12 after updated: IMOGEN(47) -> EVIE(13) -> ISLA(3) -> NULL
+Add ELIZA to bucket 13
+	 The bucket 13 after updated: ELIZA(48) -> ESME(36) -> MATILDA(34) -> WILLOW(25) -> NULL
+Add BELLA to bucket 7
+	 The bucket 7 after updated: BELLA(49) -> ISABELLE(24) -> RUBY(23) -> NULL
+Add MOLLY to bucket 7
+	 The bucket 7 after updated: MOLLY(50) -> BELLA(49) -> ISABELLE(24) -> RUBY(23) -> NULL
+Add HANNAH to bucket 10
+	 The bucket 10 after updated: HANNAH(51) -> SOFIA(41) -> EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Add EMMA to bucket 3
+	 The bucket 3 after updated: EMMA(52) -> ELLIE(40) -> CHLOE(29) -> DAISY(16) -> CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Add VIOLET to bucket 2
+	 The bucket 2 after updated: VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add LUNA to bucket 4
+	 The bucket 4 after updated: LUNA(54) -> JESSICA(15) -> NULL
+Add AMBER to bucket 14
+	 The bucket 14 after updated: AMBER(55) -> LILY(6) -> NULL
+Add LOTTIE to bucket 0
+	 The bucket 0 after updated: LOTTIE(56) -> LILLY(45) -> ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Add DARCIE to bucket 4
+	 The bucket 4 after updated: DARCIE(57) -> LUNA(54) -> JESSICA(15) -> NULL
+Add MAYA to bucket 11
+	 The bucket 11 after updated: MAYA(58) -> LOLA(44) -> ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Add GEORGIA to bucket 0
+	 The bucket 0 after updated: GEORGIA(59) -> LOTTIE(56) -> LILLY(45) -> ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Add ELIZABETH to bucket 4
+	 The bucket 4 after updated: ELIZABETH(60) -> DARCIE(57) -> LUNA(54) -> JESSICA(15) -> NULL
+Add ZARA to bucket 2
+	 The bucket 2 after updated: ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add PENELOPE to bucket 0
+	 The bucket 0 after updated: PENELOPE(62) -> GEORGIA(59) -> LOTTIE(56) -> LILLY(45) -> ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Add HOLLY to bucket 2
+	 The bucket 2 after updated: HOLLY(63) -> ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add NANCY to bucket 2
+	 The bucket 2 after updated: NANCY(64) -> HOLLY(63) -> ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add ROSE to bucket 13
+	 The bucket 13 after updated: ROSE(65) -> ELIZA(48) -> ESME(36) -> MATILDA(34) -> WILLOW(25) -> NULL
+Add EMILIA to bucket 13
+	 The bucket 13 after updated: EMILIA(66) -> ROSE(65) -> ELIZA(48) -> ESME(36) -> MATILDA(34) -> WILLOW(25) -> NULL
+Add HARRIET to bucket 2
+	 The bucket 2 after updated: HARRIET(67) -> NANCY(64) -> HOLLY(63) -> ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add GRACIE to bucket 7
+	 The bucket 7 after updated: GRACIE(68) -> MOLLY(50) -> BELLA(49) -> ISABELLE(24) -> RUBY(23) -> NULL
+Add DARCY to bucket 11
+	 The bucket 11 after updated: DARCY(69) -> MAYA(58) -> LOLA(44) -> ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Add MILA to bucket 6
+	 The bucket 6 after updated: MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Add ORLA to bucket 2
+	 The bucket 2 after updated: ORLA(71) -> HARRIET(67) -> NANCY(64) -> HOLLY(63) -> ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add ABIGAIL to bucket 9
+	 The bucket 9 after updated: ABIGAIL(72) -> MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Add JASMINE to bucket 9
+	 The bucket 9 after updated: JASMINE(73) -> ABIGAIL(72) -> MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Add ELEANOR to bucket 8
+	 The bucket 8 after updated: ELEANOR(74) -> IVY(21) -> NULL
+Add ANNA to bucket 1
+	 The bucket 1 after updated: ANNA(75) -> ELLA(12) -> NULL
+Add SUMMER to bucket 8
+	 The bucket 8 after updated: SUMMER(76) -> ELEANOR(74) -> IVY(21) -> NULL
+Add ROBYN to bucket 4
+	 The bucket 4 after updated: ROBYN(77) -> ELIZABETH(60) -> DARCIE(57) -> LUNA(54) -> JESSICA(15) -> NULL
+Add LEXI to bucket 6
+	 The bucket 6 after updated: LEXI(78) -> MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Add HEIDI to bucket 10
+	 The bucket 10 after updated: HEIDI(79) -> HANNAH(51) -> SOFIA(41) -> EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Add ANNABELLE to bucket 12
+	 The bucket 12 after updated: ANNABELLE(80) -> IMOGEN(47) -> EVIE(13) -> ISLA(3) -> NULL
+Add MARIA to bucket 2
+	 The bucket 2 after updated: MARIA(81) -> ORLA(71) -> HARRIET(67) -> NANCY(64) -> HOLLY(63) -> ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Add AURORA to bucket 8
+	 The bucket 8 after updated: AURORA(82) -> SUMMER(76) -> ELEANOR(74) -> IVY(21) -> NULL
+Add LEAH to bucket 12
+	 The bucket 12 after updated: LEAH(83) -> ANNABELLE(80) -> IMOGEN(47) -> EVIE(13) -> ISLA(3) -> NULL
+Add DARCEY to bucket 5
+	 The bucket 5 after updated: DARCEY(84) -> THEA(46) -> MAISIE(42) -> FLORENCE(30) -> ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Add VICTORIA to bucket 9
+	 The bucket 9 after updated: VICTORIA(85) -> JASMINE(73) -> ABIGAIL(72) -> MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Add HALLIE to bucket 11
+	 The bucket 11 after updated: HALLIE(86) -> DARCY(69) -> MAYA(58) -> LOLA(44) -> ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Add MARTHA to bucket 10
+	 The bucket 10 after updated: MARTHA(87) -> HEIDI(79) -> HANNAH(51) -> SOFIA(41) -> EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Add AMELIE to bucket 9
+	 The bucket 9 after updated: AMELIE(88) -> VICTORIA(85) -> JASMINE(73) -> ABIGAIL(72) -> MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Add KATIE to bucket 6
+	 The bucket 6 after updated: KATIE(89) -> LEXI(78) -> MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Add BONNIE to bucket 8
+	 The bucket 8 after updated: BONNIE(90) -> AURORA(82) -> SUMMER(76) -> ELEANOR(74) -> IVY(21) -> NULL
+Add ARABELLA to bucket 9
+	 The bucket 9 after updated: ARABELLA(91) -> AMELIE(88) -> VICTORIA(85) -> JASMINE(73) -> ABIGAIL(72) -> MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Add LACEY to bucket 6
+	 The bucket 6 after updated: LACEY(92) -> KATIE(89) -> LEXI(78) -> MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Add ANNIE to bucket 3
+	 The bucket 3 after updated: ANNIE(93) -> EMMA(52) -> ELLIE(40) -> CHLOE(29) -> DAISY(16) -> CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Add NIAMH to bucket 5
+	 The bucket 5 after updated: NIAMH(94) -> DARCEY(84) -> THEA(46) -> MAISIE(42) -> FLORENCE(30) -> ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Add LYLA to bucket 6
+	 The bucket 6 after updated: LYLA(95) -> LACEY(92) -> KATIE(89) -> LEXI(78) -> MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Add IRIS to bucket 11
+	 The bucket 11 after updated: IRIS(96) -> HALLIE(86) -> DARCY(69) -> MAYA(58) -> LOLA(44) -> ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Add ZOE to bucket 13
+	 The bucket 13 after updated: ZOE(97) -> EMILIA(66) -> ROSE(65) -> ELIZA(48) -> ESME(36) -> MATILDA(34) -> WILLOW(25) -> NULL
+Add CLARA to bucket 10
+	 The bucket 10 after updated: CLARA(98) -> MARTHA(87) -> HEIDI(79) -> HANNAH(51) -> SOFIA(41) -> EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Add MADDISON to bucket 6
+	 The bucket 6 after updated: MADDISON(99) -> LYLA(95) -> LACEY(92) -> KATIE(89) -> LEXI(78) -> MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Add MEGAN to bucket 0
+	 The bucket 0 after updated: MEGAN(100) -> PENELOPE(62) -> GEORGIA(59) -> LOTTIE(56) -> LILLY(45) -> ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+The final hash table: 
+Bucket 0: MEGAN(100) -> PENELOPE(62) -> GEORGIA(59) -> LOTTIE(56) -> LILLY(45) -> ARIA(39) -> PHOEBE(26) -> HARPER(22) -> FREYA(18) -> NULL
+Bucket 1: ANNA(75) -> ELLA(12) -> NULL
+Bucket 2: MARIA(81) -> ORLA(71) -> HARRIET(67) -> NANCY(64) -> HOLLY(63) -> ZARA(61) -> VIOLET(53) -> ERIN(43) -> LUCY(38) -> EVELYN(27) -> SOPHIA(8) -> OLIVIA(1) -> NULL
+Bucket 3: ANNIE(93) -> EMMA(52) -> ELLIE(40) -> CHLOE(29) -> DAISY(16) -> CHARLOTTE(14) -> POPPY(11) -> ISABELLA(9) -> NULL
+Bucket 4: ROBYN(77) -> ELIZABETH(60) -> DARCIE(57) -> LUNA(54) -> JESSICA(15) -> NULL
+Bucket 5: NIAMH(94) -> DARCEY(84) -> THEA(46) -> MAISIE(42) -> FLORENCE(30) -> ALICE(19) -> MIA(7) -> AMELIA(2) -> NULL
+Bucket 6: MADDISON(99) -> LYLA(95) -> LACEY(92) -> KATIE(89) -> LEXI(78) -> MILA(70) -> SOPHIE(17) -> AVA(5) -> NULL
+Bucket 7: GRACIE(68) -> MOLLY(50) -> BELLA(49) -> ISABELLE(24) -> RUBY(23) -> NULL
+Bucket 8: BONNIE(90) -> AURORA(82) -> SUMMER(76) -> ELEANOR(74) -> IVY(21) -> NULL
+Bucket 9: ARABELLA(91) -> AMELIE(88) -> VICTORIA(85) -> JASMINE(73) -> ABIGAIL(72) -> MILLIE(32) -> GRACE(10) -> EMILY(4) -> NULL
+Bucket 10: CLARA(98) -> MARTHA(87) -> HEIDI(79) -> HANNAH(51) -> SOFIA(41) -> EVA(37) -> ELSIE(31) -> SCARLETT(28) -> NULL
+Bucket 11: IRIS(96) -> HALLIE(86) -> DARCY(69) -> MAYA(58) -> LOLA(44) -> ROSIE(35) -> LAYLA(33) -> SIENNA(20) -> NULL
+Bucket 12: LEAH(83) -> ANNABELLE(80) -> IMOGEN(47) -> EVIE(13) -> ISLA(3) -> NULL
+Bucket 13: ZOE(97) -> EMILIA(66) -> ROSE(65) -> ELIZA(48) -> ESME(36) -> MATILDA(34) -> WILLOW(25) -> NULL
+Bucket 14: AMBER(55) -> LILY(6) -> NULL
